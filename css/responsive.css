@@ -1,0 +1,675 @@
+* {
+	-moz-box-sizing 	: border-box;
+	-webkit-box-sizing 	: border-box;
+	box-sizing		: border-box;
+}
+
+*:focus {
+	outline 			: none; 
+}
+
+html {
+        height                          : 100%;
+}
+
+body {
+	padding				: 0;
+	margin				: 0;
+	width				: 100%;
+        height                          : 100%;
+        font-family			: /*'Raleway-Light', */ Helvetica, Arial, sans-serif;
+	color				: #3B5998;
+        background-color                : #E8EFF1;
+	/* text-shadow			: 0px 0px 2px black; */
+}
+
+a {
+	text-decoration         : none;
+	color                   : white;
+}
+
+a:hover {
+        text-decoration         : none;
+}
+
+img {
+	border				: none;
+}
+
+h1 {
+        margin                          : 0.4rem 0; 
+	line-height			: 1em;
+        margin-bottom                   : 20px;
+}
+
+h1, h2 {
+        text-align: center;
+        margin: 0.5rem 0;
+}
+
+input, select, textarea {
+        border                  : 1px solid;
+        border-color            : rgb(207, 195, 195);
+        font-family             : Helvetica,Arial,sans-serif;
+        font-size               : 0.8em; 
+        color                   : #363636;
+        padding                 : 0.3rem;
+}
+
+input:hover {
+        background-color        : #E0E0E0;
+}
+
+input:not([type=checkbox]), textarea, .input {
+        width			: 100%;
+        /* max-width               : 200px; */
+        margin                  : 0 auto;
+}
+
+textarea, span {
+        display                 : block; 
+}
+
+input[type=text], input[type=password], input[type=email], input[type=checkbox] {
+        padding                 : 1rem 0.5rem;
+        height                  : 1.8em;
+}
+
+input[type=radio] {
+        margin              : 0;
+        display             : inline-block; 
+}
+
+label {
+        line-height         : 1.8em;
+        max-width               : 100%;
+        display             : inline-block;
+}
+
+select {
+        font-weight         : 300;
+        height              : 1.8em;
+}
+
+select option[disabled] {
+    background-color            : #DDD; 
+}
+
+textarea {
+    min-height              : 70px;
+}
+
+section {
+	display				: block;
+        width                           : 100%;
+	height                          : 100%;
+}
+
+section ul {
+        list-style-type                 : none;
+        padding                         : 0;
+        margin                          : 0;
+}
+
+/* Classes */
+        .panels {
+                position                : relative;
+                max-width               : 1024px;
+                margin                  : 0 auto;
+        }
+        .panels a {
+                cursor                  : pointer;
+                color                   : #3B5998;
+        }
+        .panels a:hover{
+                border-bottom           : 1px solid #3B5998; 
+        }
+        .panels > a {
+                color				: white;
+                border-bottom       : 1px solid #F9DF8D;	
+        }
+        .hidden {
+                display				: none;
+        }
+        .little {
+                font-size			: 9pt;
+                margin				: 0;
+        }
+        .left {
+                text-align          : left; 
+        }
+        .right {
+                text-align                  : right; 
+        }
+        .center {
+                text-align                : center;
+        }
+        .messages {
+                display		: none;
+                text-shadow     : none;
+                text-align      : center;
+        }
+
+        .loginresponse {
+                display                 : block;
+                border                  : 0.1rem solid rgb(105, 105, 105);
+                background-color        : rgb(243, 118, 122);
+                color                   : rgb(58, 58, 58);
+                padding                 : 0.4rem;
+        }
+        .col_230 {
+                width               : 230px;
+        }
+        .inline-block {
+                display             : inline-block;
+                text-align          : center;  
+                vertical-align      : middle; 
+        }
+
+        .bouton {
+                font-family             : Arial,sans-serif;
+                font-size               : 12pt;
+                font-weight             : 600;
+                background-color        : #D0974F;
+                border                  : none;
+                color                   : white;
+                display         	: inline-block;
+                outline         	: medium none;
+                cursor          	: pointer;
+                text-align              : center;
+                text-transform          : uppercase;
+                padding         	: .6rem 1em;
+                transition              : all 0.4s;
+                white-space             : nowrap;
+        }
+        .bouton[disabled], .bouton[disabled]:hover {
+                background-color            : #999; 
+                cursor                      : default;
+                opacity                     : 0.6;
+        }
+        .bouton:hover {
+                background-color    : #D0974F; 
+        }
+        .disabled, .disabled:hover {
+                background-color                : grey;
+                cursor                          : default;
+        }
+        .liens {
+                display 			: block;
+                padding                     : 1em 0.5em;
+        }
+        .liens:hover {
+                cursor                  : pointer;
+        }
+        .fleft{
+                float           : left;
+        }
+        .fright{
+                float           : right;
+        }
+        .print {
+                display                         : none; 
+        }
+        .dialogs {
+                display                 : none; 
+        }
+        .champs {
+                display             : block;
+                padding-bottom      : 0.5em; 
+        }
+        .cells {
+                width                       : 100%; 
+        }
+        .cells .c_titres {
+                display             : block;
+                width               : 100%;
+        }
+        .required:after {
+                content                         : '*';
+                color                           : red;
+                font-size                       : 16pt;
+        }
+        .dialogs p {
+                color                           : red;
+                font-size                       : 10pt;
+        }
+        #dialog .cells {
+                padding                 : 5px;
+                display                 : inline-block;
+                width                   : 50%;
+                vertical-align          : top;
+        }
+        .little_font-size{
+                font-size               : 10pt; 
+        }
+        .rouge {
+                color                   : red;
+        }
+        .background_blue {
+                background-color            : #3B5998;
+                color                       : white;
+                margin                      : 0 0.2em;
+        }
+        .background_blue > * {
+                display                     : block;
+                padding                     : 0.2em; 
+        }
+        .col_30 {
+                width                       : 25%;
+                text-align                  : center; 
+        }
+        .col_30 * {
+                width                       : 100%;
+        }
+
+        .tableaux {
+                border-collapse                 : collapse;
+                background-color                : white;
+                border                          : 1px solid #3B5998;
+                width                           : 100%;
+        }
+        .tableaux thead {
+                background-color                : #3B5998;
+                border-bottom                   : 3px solid #293E6A;
+                color                           : white;
+        }
+        .tableaux thead th {
+                padding             : 0.5em;
+                text-align          : center; 
+        }
+        .tableaux thead th:hover {
+                background-color            : #6280C1; 
+                cursor                      : pointer;
+        }
+        .tableaux > tbody > tr > td {
+                padding             : 5px 10px; 
+                text-align          : center;
+                border-right        : 1px dashed #3B5998;
+                border-bottom       : 1px solid #3B5998;
+                cursor              : default;
+        }
+        .tableaux > tbody > tr > td > a{
+                color                       : #3B5998;
+                margin                      : 0 0.5em;
+        }
+        .tableaux > tbody > tr > td > img {
+                margin                      : 0 auto;
+                width                       : 100%;
+        }
+        .tableaux > tbody img {
+                width                           : 100%;
+                max-width                       : 4cm;
+                max-height                      : 4.5cm;
+        }
+        .tableaux .col_230{
+                width                           : 230px;
+        }
+        .tableaux > ul > li > ul > li {
+                padding             : 0 0.5em;
+        }
+
+        .cases {
+                height                  : 200px;
+                vertical-align          : middle; 
+        }
+        .cases > * {
+                display                         : block ;
+        }
+        .cases > span:first-child{
+                height                          : 80%;
+        }
+        .cases > span:last-child{
+                height                          : 20%;
+        }
+        .cases > span > img {
+                max-height                          : 100%; 
+        }
+
+        /* Bootstrap-related classes */
+        .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+                background-color:#3B5998;
+        }
+        .custom-checkbox .custom-control-input:checked~.custom-control-label::after{
+                background-color:#3B5998;
+        }
+
+        .custom-checkbox .custom-control-input:focus~.custom-control-label::before{
+                /* box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 0, 247, 0.25); */
+                box-shadow: none;
+        }
+
+        svg > path {
+                cursor: pointer;
+        }
+/* Fin classes */
+
+
+/* Login */
+        #messageUser,  #messagePwd, .messages {
+                display:block;
+        }
+
+/* FIN Login */
+
+/* Barre de menu */
+        #menu {
+                margin 				: 0 auto;
+                position			: relative;
+                display				: block;
+                max-width			: 1024px;
+                border-radius                   : 8px;
+                line-height			: 25px;
+        }
+
+        #menu ul {
+                font-size: 0;
+                padding				: 0;
+                margin                          : 0;
+        }
+
+        #menu_wrapper a:hover {
+                border-bottom		: none;
+        }
+
+        #menu li {
+                vertical-align		: top;
+                display			: inline-block;
+                text-align 		: center;
+                font-size 		: 14pt;
+                list-style-type         : none;
+        /*      background		: url("../images/menu_icons.png") no-repeat; */
+        }
+
+        #menu li a:hover {
+                color			: white;
+                background              : #6280C1; 
+        }
+
+        #menu li a img {
+                width                   : 32px;
+                margin			: 10px auto;
+                display			: none;
+        }
+
+        #menu li a.active {
+                color                   : #3B5998;
+                background-color        : white;
+                font-weight             : bold;
+                text-shadow             : none; 
+        }
+
+/* FIN Barre de menu */
+
+#menu_wrapper {
+	display				: block;
+	position			: fixed;
+	top				: 0;
+	z-index				: 2;
+	width				: 100%;
+        min-height                      : 62px; 
+	background-color                : #3B5998;
+}
+
+#menu_toggle {
+	display				: none;
+        position                        : absolute;
+        right                           : 0; 
+        width                           : 62px;
+        height                          : 62px;
+        background-color                : #3B5998;
+        border-left                     : 2px solid #293E6A;
+}
+
+#menu_toggle img {
+        position                        : relative;
+        top                             : 16px;
+        cursor                          : pointer; 
+}
+
+#message {
+    text-shadow     	: none;
+    font-weight         : bold;  
+}
+
+#fond {
+        height                      : 100%;
+        background-image            : url(../images/frog.jpg);
+        background-position: top left;
+        background-size             : cover; 
+}
+
+#conteneur {
+        display: block;
+        position: relative;
+        top: 2rem;
+        margin                      : 0 auto;
+        max-width: 600px;
+        width: fit-content;
+        width: moz-fit-content;
+}
+
+#login {
+        line-height                 : normal;
+        padding                     : 2em;
+        background                  : #503931;
+        color                       : white;
+        /*
+        background: -webkit-linear-gradient(left top, #1C98B1 , #85c0cc);
+        background: -o-linear-gradient(bottom right, #1C98B1, #85c0cc);
+        background: -moz-linear-gradient(bottom right, #1C98B1, #85c0cc);
+        background: linear-gradient(to bottom right, #1C98B1 , #85c0cc);
+        */
+        vertical-align              : middle;
+}
+
+#contenu {
+	position			: relative;
+	top				: 62px;
+        padding                         : 1em 0;
+}
+
+#add {
+        margin-bottom                   : 5em;
+}
+
+.add {
+        cursor               : pointer;
+        color                : #3B5998;
+}
+.bi {
+        font-size                       : 2em;
+}
+svg {
+        position: absolute;
+        right: 0;
+}
+
+#Users .bouton {
+        color                   : white;
+}
+
+#hidden_dates, #hidden_titres {
+        display                 : none;
+}
+
+#hidden_titres select{
+        width                   : 100%; 
+}
+
+#toggle_titres {
+        color                           : #3B5998;
+        padding-left                    : 0.3em; 
+}
+
+#c_edit_titre, #c_add_titre, #save_add_titre, #save_titre {
+        display                         : none;
+        margin                          : 0 5px;
+}
+
+/* PIED de page*/
+#pied_wrapper {
+	position			: fixed;
+        opacity                         : 0.3;
+        transition                      : all 0.3s;
+	bottom				: 0;
+	display				: block;
+	width				: 100%;
+	background-color                : #3B5998;
+        cursor                          : default;
+}
+
+#pied_wrapper:hover {
+        opacity                         :1;
+}
+
+#pied {
+        text-align                      : center; 
+	margin				: 0 auto;
+	padding				: 1em 0;
+	max-width			: 1024px;
+	display				: table;
+	width 				: 100%;
+        color                           : white;
+}
+
+#pied *{
+	text-shadow			: none;
+	list-style-type                 : none;
+}
+
+#pied ul {
+	padding-left                    : 0;
+        margin                          : 0;
+}
+
+#pied ul li {
+	display				: block;
+	padding				: 0.3em 1em;
+}
+
+#pied .cells {
+	display				: table-cell;
+	position			: relative;
+	min-width			: 48%;
+	bottom				: 0;
+	vertical-align                  : bottom;
+        text-align                      : center; 
+}
+
+#pied .cells:first-child {
+	border-right                    : 1px solid #D0CABF;
+	text-align			: left;
+}
+
+#pied .ul_ligne li {
+	display 			: inline-block;
+}
+
+/* FIN Pied de page */
+
+
+/* Options Responsive */
+@media only screen and (max-width: 800px) {
+    * {
+        text-align          : center;
+    }
+    body {
+        font-size: 1.5rem;
+    }
+    label {
+        text-align: left;
+    }
+    .panels {
+        padding                 : 3em 0;
+    }
+    #conteneur {
+            left:0;
+    }
+    #menu_toggle {
+        display                 : block;
+    }
+    #logo {
+            max-width		: 200px;
+            margin			: 0 auto;
+            display			: block;
+            float 			: none;
+            text-align		: left;
+            min-height      : 77px;
+    }
+    #logo a {
+        line-height     : 60px;
+    }
+    #menu {
+            border-radius	: 0;
+            padding         : 0;
+    }
+    #menu ul {
+            display			: none;
+            margin			: 0;
+            float                       : none;
+    }
+    .liens {
+            padding			: 1em 0;
+    }
+    #menu li {
+            display			: block;
+    }
+    #menu li a img, #menu li a[href]:hover .hover_img {
+            display			: none;
+    }
+    .panels > * {
+        margin-left          : auto; 
+        margin-right         : auto; 
+    }
+    .first {
+            padding                 : 0;
+    }
+    .tableaux thead {
+            font-size                   : 10pt;
+    }
+    #dialog {
+        width           : 100%;
+    }
+    .cells {
+        width           : 100%;
+        display         : block;
+    }
+    .champs > .input, .champs > input {
+        display         : block;
+        width           : 100%;
+        max-width       : none; 
+    }
+    label {
+        min-width           : 0; 
+    }
+    #add {
+        margin-bottom                       : 5em; 
+    }
+    #pied, #pied .cells {
+            display			: block;
+            width			: 100%;
+            text-align		: center;
+    }
+    #pied ul li {
+            display			: inline-block;
+    }
+    #pied .cells:first-child {
+            border-right		: 0;
+            text-align			: center;
+    }
+}
+@media only screen and (min-width: 800px) {
+	#menu ul {
+		display				: block !important;
+	}
+}
+@media only screen and (max-width: 480px) {
+        body {
+                font-size: 1.2rem;
+        }
+        #conteneur {
+                top:0;
+                width: 100%;
+        }
+}
+/* FIN Options Responsive*/
