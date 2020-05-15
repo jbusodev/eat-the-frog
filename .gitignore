@@ -1,0 +1,10 @@
+.htaccess
+jquery*.js
+.prettier*
+nbproject
+connexionPDO.php
+colourpalete
+polices
+ui*.png
+silhouette.png
+JQuery*.png
