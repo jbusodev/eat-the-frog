@@ -11,7 +11,7 @@ $page = $_SESSION['page'];
 $menu_utilisateurs = '';
 $menu_images = '';
 $mode = '<b>utilisateur</b>';
-$messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span style=\"text-align:right\">Vous êtes connecté en tant qu' $mode</span></div>"; 
+$messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span style=\"text-align:right\">Vous êtes connecté en tant qu'$mode</span></div>";
 //Vérification du niveau de l'utilisateur authentifié
 if ( isset($_SESSION['niveau']) ) {
     $niveau = $_SESSION['niveau'];
@@ -24,13 +24,13 @@ if ( isset($_SESSION['niveau']) ) {
         }
         if($niveau == 2){
             $mode = '<b>Administrateur</b>';
-            $messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span>Vous êtes connecté en tant qu' $mode</span></div>"; 
-        }       
+            $messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span>Vous êtes connecté en tant qu' $mode</span></div>";
+        }
     }
 }
 ?>
-<!DOCTYPE html> 
-<!-- Le DOCTYPE HTML5 est utilisé pour cette application, certaines balises comme <nav> 
+<!DOCTYPE html>
+<!-- Le DOCTYPE HTML5 est utilisé pour cette application, certaines balises comme <nav>
      et <section> n'est valide qu'avec ce DOCTYPE. Liste complète
      des éléments valides à la page http://www.w3schools.com/tags/ref_html_dtd.asp
 
@@ -52,7 +52,7 @@ if ( isset($_SESSION['niveau']) ) {
         <!-- jQuery UI -->
         <script type="text/javascript" src="./js/lib/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" media="all" href="./css/jquery-ui.css" />
-        
+
         <!-- Plugin JS PrinthThis impression -->
         <script type="text/javascript" src="js/plugins/jQuery.print.js"></script>
     </head>
@@ -87,7 +87,7 @@ if ( isset($_SESSION['niveau']) ) {
                             include_once('includes/titres.php');
                         ?>
                         <input type="text" id="c_edit_titre" placeholder="Entrez le nouveau titre ici"/>
-                        <input id="edit_titre" class="bouton btnDisabled" type="button" value="Modifier"/>
+                        <input id="edit_titre" class="bouton btnDisabled inline-block" type="button" value="Modifier"/>
                         <input id="save_titre" class="bouton btnDisabled" type="button" value="Enregistrer"/>
                         <span id="messageEdit"></span>
                         <div id="add_titre"><a>Ajouter un titre</a></div>
@@ -105,4 +105,4 @@ if ( isset($_SESSION['niveau']) ) {
             ?>
         </div>
     </body>
-</html> 
+</html>

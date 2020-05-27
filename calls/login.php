@@ -2,63 +2,49 @@
 require_once('../connexionPDO.php');
 require_once('functions.php');
 
-$reponseUser = '';
-$reponsePwd = '';
-$pseudo = '';
+$reponse='';
+$username = '';
 $isDisabled = TRUE;
 
-/* Vérification champ LOGIN*/
+/* LOGIN Check in Database*/
 if( isset($_POST['user']) ) {
-    $pseudo = $_POST['user'];
-    if ($pseudo != '') {
+    $username = $_POST['user'];
+    if ($username != '') {
         $query_login = "SELECT pseudo FROM tbl_users WHERE pseudo = :pseudo";
         $res_test = $connexion->prepare($query_login);
-        $res_test->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
+        $res_test->bindValue(":pseudo", $username, PDO::PARAM_STR);
         $res_test->execute();
         $result = $res_test->fetch(PDO::FETCH_OBJ);
         if($result != NULL) {
                 $reponseUser = "OK";
         }
-        else {
-                $reponseUser = "Pseudo incorrect";
-        }
-    } else {
-            $reponseUser = 'Veuillez remplir ce champ';
     }
-} else {
-        $reponseUser = "Veuillez remplir ce champ";
 }
-/* FIN Vérification champ LOGIN*/
+/* END LOGIN Check*/
 
-/* Vérification champ MOT DE PASSE*/
+/* Password Check*/
 if ( isset($_POST['pwd']) ) {
     $pwd = $_POST['pwd'];
     if ($pwd != '') {
         $query_test = "SELECT password FROM tbl_users WHERE password = MD5(:mdp) AND pseudo = :pseudo";
         $res_test = $connexion->prepare($query_test);
         $res_test->bindValue(':mdp', $pwd, PDO::PARAM_STR);
-        $res_test->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+        $res_test->bindValue(':pseudo', $username, PDO::PARAM_STR);
         $res_test->execute();
         $result = $res_test->fetch(PDO::FETCH_OBJ);
         if($result != NULL) {
                 $reponsePwd = "OK";
         }
-        else {
-                $reponsePwd = "Mot de passe incorrect";
-        }
-    } else {
-        $reponsePwd = "Veuillez remplir ce champ";
     }
-} else {
-    $reponsePwd = "Veuillez remplir ce champ";
 }
+// Set redirection if credentials OK
 $redirect = $reponseUser === 'OK' && $reponsePwd === 'OK' ? 'taches.php':'';
 
 if($redirect !== '') {
     $isDisabled = FALSE;
     $query_test = "SELECT * FROM tbl_users WHERE pseudo = :pseudo";
     $res_test = $connexion->prepare($query_test);
-    $res_test->bindValue(":pseudo", $pseudo, PDO::PARAM_STR);
+    $res_test->bindValue(":pseudo", $username, PDO::PARAM_STR);
     $res_test->execute();
     $result = $res_test->fetch(PDO::FETCH_OBJ);
     if($result != NULL) {
@@ -70,7 +56,7 @@ if($redirect !== '') {
             $_SESSION['pseudo'] = $result->pseudo;
     }
 }
-$arr = array('isDisabled' => $isDisabled, 'redirect' => $redirect, 'reponseUser' => $reponseUser, 'reponsePwd' => $reponsePwd, 'user' => $pseudo, 'pwd' => $pwd);
+$arr = array('redirect' => $redirect, 'user' => $username, 'pwd' => $pwd);
 echo json_encode($arr);
-/* FIN Vérification champ LOGIN*/
+/* END PASSWORD Check*/
 
