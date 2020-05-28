@@ -4,7 +4,6 @@ require_once('functions.php');
 
 $reponse='';
 $username = '';
-$isDisabled = TRUE;
 
 /* LOGIN Check in Database*/
 if( isset($_POST['user']) ) {
@@ -16,7 +15,7 @@ if( isset($_POST['user']) ) {
         $res_test->execute();
         $result = $res_test->fetch(PDO::FETCH_OBJ);
         if($result != NULL) {
-                $reponseUser = "OK";
+                $responseUser = "OK";
         }
     }
 }
@@ -33,12 +32,12 @@ if ( isset($_POST['pwd']) ) {
         $res_test->execute();
         $result = $res_test->fetch(PDO::FETCH_OBJ);
         if($result != NULL) {
-                $reponsePwd = "OK";
+                $responsePwd = "OK";
         }
     }
 }
 // Set redirection if credentials OK
-$redirect = $reponseUser === 'OK' && $reponsePwd === 'OK' ? 'taches.php':'';
+$redirect = $responseUser === 'OK' && $responsePwd === 'OK' ? 'taches.php':'';
 
 if($redirect !== '') {
     $isDisabled = FALSE;
@@ -56,7 +55,11 @@ if($redirect !== '') {
             $_SESSION['pseudo'] = $result->pseudo;
     }
 }
-$arr = array('redirect' => $redirect, 'user' => $username, 'pwd' => $pwd);
+
+$username = $username !== '' ? 'ok' : '';
+$pwd = $pwd !== '' ? 'ok' : '';
+
+$arr = array('redirect' => $redirect, 'responseUser' => $responseUser, 'responsePwd' => $responsePwd, 'user' => $username, 'pwd' => $pwd);
 echo json_encode($arr);
 /* END PASSWORD Check*/
 

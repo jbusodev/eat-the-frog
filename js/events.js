@@ -3,7 +3,7 @@ $(document).ready(function() {
     /* ------------------------ Login Page Events ------------------------ */
     // Credentials Check
     if (window.location.href.match('\\index')) {
-        verifieIdentifiants();
+        checkCredentials();
     }
 
     /* -------------------------- END Login Page Events */
@@ -12,18 +12,18 @@ $(document).ready(function() {
     /* -------------------------- Tables Events ------------------- */
 
     // Displays finished tasks
-    $('#cacher_encours').prop('checked', false);
-    $('#toggle_terminees').click(function() {
+    $('#hide_ongoing').prop('checked', false);
+    $('#toggle_finished').click(function() {
         if ($(this).is(':checked')) {
-            $('.terminees').show();
-            $('#cacher').show();
+            $('.finished').show();
+            $('#hide').show();
         } else {
-            $('.terminees').hide();
-            $('#cacher').hide();
+            $('.finished').hide();
+            $('#hide').hide();
         }
     });
-    $('#cacher_encours').click(function() {
-        $('.encours').toggle();
+    $('#hide_ongoing').click(function() {
+        $('.ongoing').toggle();
     });
     // triggers login when pressing Enter in pwd field
     $('#password').keydown(function(event) {
@@ -38,75 +38,79 @@ $(document).ready(function() {
         }
     });
     iconesBoutons();
-    /* -------------------------- FIN Evenements tableaux ------------------- */
+    /* -------------------------- END Tables Events ------------------- */
 
 
-    /* -------------------------- Evenements Boites de dialogue ------------------- */
+    /* -------------------------- Dialog Events ------------------- */
 
-    // Définition des paramètres par défaut des datepicker (calendrier de sélection de date)
+    // datepicker Default Settings
     setDefaultDatepicker();
 
 
-    // Terminer un tâche
+    // Mark a task as finished
     $(document).on("click", ".finir", function() {
         var nItem = $(this).attr('id');
         setDialog('end', nItem);
     });
 
-    // Ajouter une tâche
+    // Add a task
     $(document).on("click", ".add", function() {
         setDialog('add');
     });
 
-    // Modifier une tâche
+    // Edit a task
     $(document).on("click", ".edit", function() {
         var nItem = $(this).attr('id');
         setDialog('edit', nItem);
     });
 
-    // Supprimer une tâche
+    // Delete a task
     $(document).on("click", ".del", function() {
         var nItem = $(this).attr('id');
         setDialog('delete', nItem);
     });
     $(document).on("click", ".imprint", function() {
-        var nItem = $(this).attr('id'); // le numero de la ligne est récuperé
-        image = $(this).attr('data-image'); // l'image de la ligne est récuperé
+        var nItem = $(this).attr('id'); // item's ID is set in nItem
+        image = $(this).attr('data-image'); // item's image is set in image
         if (nItem) {
             setDialog('print', nItem);
         } else {
             window.print();
         }
     });
-    // Appel de la fonction qui rafrachit la liste des titres selon le nb de repertoires choisi
-    // sur la page classeurs.php
-    $(document).on("change", "#c_repertoire", function() {
+    /**
+     * Titles list refreshed
+     * when directories number changed
+     * in folders.php
+     * */
+    //
+    $(document).on("change", "#f_directory", function() {
         var nItem = $('#item').val();
-        rafraichirTitresDialog(nItem);
+        refreshDialogTitles(nItem);
     });
-    $(document).on("click", "#toggle_titres", function() {
+    $(document).on("click", "#toggle_titles", function() {
         if (toggled) {
-            $('#toggle_titres').text('(Afficher)');
+            $('#toggle_titles').text('(Afficher)');
             toggled = false;
         } else {
-            $('#toggle_titres').text('(Masquer)');
+            $('#toggle_titles').text('(Masquer)');
             toggled = true;
         }
-        $('#hidden_titres').toggle();
+        $('#hidden_titles').toggle();
     });
 
 
 
-    /* -------------------------- FIN Evenements Boites de dialogue -------------- */
+    /* -------------------------- END Dialog Events -------------- */
 
 
-    /* -------------------------- Evenements page de gestion des titres -------------- */
+    /* -------------------------- Title Management Page -  Events -------------- */
     requetesTitres();
     $('#advertise').show();
-    /* -------------------------- FIN Evenements page de gestion des titres -------------- */
+    /* -------------------------- END Title Management Page - Events -------------- */
 
 
-    /* -------------------------- Evenements page de gestion des utilisateurs -------------- */
+    /* -------------------------- Users Page - Events -------------- */
     eventsUsers();
     $('.save_user').click(function() {
         var nItem = $(this).attr('id');
@@ -139,20 +143,20 @@ $(document).ready(function() {
             }
         });
     });
-    /* -------------------------- Evenements page de gestion des utilisateurs -------------- */
+    /* -------------------------- END Users Page - Events-------------- */
 
 
-    /* -------------------------- Evenements généraux -------------- */
+    /* -------------------------- General Events -------------- */
 
-    // Evenement click sur bouton menu Mobile
+    // Mobile menu Toggle
     $("#menu_toggle img").click(function() {
         $("#menu ul").slideToggle();
     });
 
-    // Evenement clic menu
+    // Menu toggle
     $(".liens").click(function() {
         $("#menu ul").toggle();
     });
 });
 
-/* -------------------------- FIN Evenements généraux -------------- */
+/* -------------------------- END General Events -------------- */

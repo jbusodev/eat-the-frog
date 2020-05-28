@@ -1,5 +1,5 @@
-// Fonction page index.php
-function verifieIdentifiants() {
+// Login Page - Functions
+function checkCredentials() {
     // login fileds
     let username = document.getElementById('user');
     let password = document.getElementById('password');
@@ -7,118 +7,13 @@ function verifieIdentifiants() {
     // error message
     let errormessage = document.getElementsByClassName('loginresponse');
 
-    // Désactivation du bouton Connexion
-    // $('#btnLogin').prop('disabled', true);
-
-    // Vérification du pseudo
-    /*
-    $('#user').keyup(function(){
-            $('#message').hide();
-            $('#messageUser').hide();
-            var user = $('#user').val(); //Reprise du user en temps réel
-            var pwd = $('#password').val();
-            var taille = (user).length; //Taille du pseudo
-            if(taille >=3){
-                    $.ajax({
-                        type: 'POST',
-                        url: 'calls/login.php',
-                        data: {user:user, pwd:pwd}, //Paramètre envoyé à signup.php pour traitement
-                        dataType:"json",
-                        success: function(data){ //data est un nom choisi et peut être modifié, il regroupe toutes les réponses de checkLogin envoyé au format JSON
-                                if(data.reponseUser==="OK"){ //reponseUser correspond à la réponse renvoyée par calls/login.php
-                                    $('#user').css("border","1px solid #0D9123"); //Applique une bordure verte au champ
-                                    $('#messageUser').css({ //Change la couleur du message et son ombre
-                                        "color" :"#66FF00"
-                                    });
-                                    $('#messageUser').show(); //Affiche le message du champ login
-                                    $('.messages').hide;
-                                    $('#messageUser').text('✓');
-                                }else{
-                                    $('#user').css("border","1px solid #FF2B58"); //Applique une bordure rouge au champ
-                                    $('#messageUser').css({
-                                        "color" :"red",
-                                        "text-shadow" : "0px 0px black",
-                                    });
-                                    $('#messageUser').show();
-                                    $('#messageUser').text(data.reponseUser);
-                                }
-                                if(!data.isDisabled){
-                                    $('#btnLogin').prop('disabled', false);
-                                } else
-                                    $('#btnLogin').prop('disabled', true);
-                        },
-                        error: function(data){
-                            //alert('erreur');
-                        }
-                    });
-            }else{
-                    $('#messageUser').hide();
-                    $('#user').css({
-                        "border" : "1px solid",
-                        "border-color" : "#999 #BBB #DDD"
-                    });
-            }
-    });
-    */
-
-    // Vérification du mot de passe
-    /*
-    $('#password').keyup(function(){
-            $('#message').hide();
-            $('#messagePwd').hide();
-            var user = $('#user').val();
-            var pwd = $('#password').val();
-            // la taille de pseudo
-            var taille = (pwd).length;
-            if(taille >=4){
-                    $.ajax({
-                        type: 'POST',
-                        url: 'calls/login.php',
-                        data: {user:user, pwd:pwd},
-                        dataType:"json",
-                        success: function(data){
-                                if(data.reponsePwd==="OK"){
-                                    $('#password').css("border","1px solid #0D9123");
-                                    $('#messagePwd').css({
-                                        "color" :"#66FF00"
-                                    });
-                                    $('#messagePwd').show();
-                                    $('.messagesPwd').show;
-                                    $('#messagePwd').text('✓');
-                                }else{
-                                    $('#password').css("border","1px solid #FF2B58");
-                                    $('#messagePwd').css("color","red");
-                                    $('#messagePwd').show();
-                                    $('#messagePwd').text(data.reponsePwd);
-                                }
-                                if (!data.isDisabled){
-                                    $('#btnLogin').prop('disabled', false);
-                                } else
-                                    $('#btnLogin').prop('disabled', true);
-                        },
-                        error: function(){
-                            $('#contenu').append('<div id="ERROR"></div>');
-                            $('#ERROR').append(data.responseText);
-                        }
-                    });
-            }else{
-                    $('#messagePwd').hide();
-                    $('#password').css({
-                        "border" : "1px solid",
-                        "border-color" : "#999 #BBB #DDD"
-                    });
-            }
-    });
-    */
     username.focus();
-
 
     // Authentication check
     $('#btnLogin').click(function() {
         user = $(username).val();
         pwd = $(password).val();
 
-        // la taille de pseudo
         $.ajax({
             type: 'POST',
             url: 'calls/login.php',
@@ -127,18 +22,23 @@ function verifieIdentifiants() {
             success: function(data) {
                 // Successfully authenticated
                 if (data.redirect !== '') {
-                    window.location.href = data.redirect;
+                    fieldsMessages(errormessage);
+                    setTimeout(function() {
+                        window.location.href = data.redirect;
+                    }, 600);
+
                 }
                 // Empty fields
                 else if (data.user == "" || data.pwd == "") {
-                    console.log('empty fields');
                     $(errormessage).text('Veuillez remplir tous les champs.');
                     $(errormessage).fadeIn();
-                } else {
-                    console.log('invalid');
+                }
+                // No matching credentials
+                else {
                     $(errormessage).text('Aucun utilisateur/mot de passe ne correspond à ces identifiants. Veuillez vérifiez les champs.');
                     $(errormessage).fadeIn();
                 }
+                $(username).select();
             },
             error: function(data) {
                 console.error(data);
@@ -147,10 +47,86 @@ function verifieIdentifiants() {
             }
         });
     });
-};
-// FIN fonction page index.php
+}
 
-// ----------------------------- Fonction générales ---------------------------
+function fieldsMessages(err, usr, pass) {
+    // UI Refresh
+    $(err).text('');
+    $(err).hide();
+    $('#message').hide();
+    $('#messageUser').hide();
+    $('#messagePwd').hide();
+
+    // Get fields values
+    var user = $('#user').val();
+    var pwd = $('#password').val();
+
+    // --------------- Username Check via Ajax -> PHP -> SQL(PDO) ------------
+    $.ajax({
+        type: 'POST',
+        url: 'calls/login.php',
+        data: { user: user, pwd: pwd }, // fields values sent in request
+        dataType: "json",
+        success: function(data) { // data includes the login process response (JSON Array)
+            if (data.responseUser === "OK") { // responseUser corresponds to username response
+                $('#user').css("border", "1px solid #0D9123");
+                $('#messageUser').css({ //Change la couleur du message et son ombre
+                    "color": "#66FF00"
+                });
+                $('#messageUser').show(); // Affiche le message du champ login
+                $('.messages').hide;
+                $('#messageUser').text('✓');
+            }
+        },
+        error: function(data) {
+            //alert('erreur');
+        }
+    });
+
+    // -------------------------- Password Check --------------------------
+
+    // Gets password length
+    var taille = (pwd).length;
+
+    if (taille >= 4) {
+        $.ajax({
+            type: 'POST',
+            url: 'calls/login.php',
+            data: { user: user, pwd: pwd },
+            dataType: "json",
+            success: function(data) {
+                if (data.responsePwd === "OK") {
+                    $('#password').css("border", "1px solid #0D9123");
+                    $('#messagePwd').css({
+                        "color": "#66FF00"
+                    });
+                    $('#messagePwd').show();
+                    $('.messagesPwd').show;
+                    $('#messagePwd').text('✓');
+                } else {
+                    $('#password').css("border", "1px solid #FF2B58");
+                    $('#messagePwd').css("color", "red");
+                    $('#messagePwd').show();
+                    $('#messagePwd').text(data.responsePwd);
+                }
+            },
+            error: function() {
+                console.error(data);
+            }
+        });
+    } else {
+        $('#messagePwd').hide();
+        $('#password').css({
+            "border": "1px solid",
+            "border-color": "#999 #BBB #DDD"
+        });
+    }
+
+}
+
+// END Login Page - Functions
+
+// ----------------------------- General Functions ---------------------------
 function setDefaultDatepicker() {
     $.datepicker.regional['fr'] = {
         minDate: 0,
@@ -193,7 +169,7 @@ function setDialog(action, nItem) {
     $.post("includes/dialog.php", { action: action, nItem: nItem })
         .done(function(data) {
             $('#dialog').remove();
-            $('.tableaux').after(data);
+            $('.tables').after(data);
             var page = $('#page').val();
             var pseudo = $('#pseudo').val();
             var aujourdhui = '';
@@ -224,10 +200,10 @@ function setDialog(action, nItem) {
                                                             }
                                                         }
                                                     })
-                                                    rafraichirTableau();
-                                                    $('#cacher').hide();
-                                                    $('#toggle_terminees').prop('checked', false);
-                                                    $('#cacher_encours').prop('checked', false);
+                                                    rafraichirtable();
+                                                    $('#hide').hide();
+                                                    $('#toggle_finished').prop('checked', false);
+                                                    $('#hide_ongoing').prop('checked', false);
                                                 } else {
                                                     $('#message').text('Veuillez remplir les champs obligatoires');
                                                 }
@@ -273,10 +249,10 @@ function setDialog(action, nItem) {
                                                     $('#c_remarque').val('');
                                                     $('#message').fadeIn();
                                                     $('#message').text(data.reponse);
-                                                    rafraichirTableau();
-                                                    $('#cacher').hide();
-                                                    $('#toggle_terminees').prop('checked', false);
-                                                    $('#cacher_encours').prop('checked', false);
+                                                    rafraichirtable();
+                                                    $('#hide').hide();
+                                                    $('#toggle_finished').prop('checked', false);
+                                                    $('#hide_ongoing').prop('checked', false);
                                                     return;
                                                 } else {
                                                     $('#message').fadeIn();
@@ -324,10 +300,10 @@ function setDialog(action, nItem) {
                                                             }
                                                         }
                                                     })
-                                                    rafraichirTableau();
-                                                    $('#cacher').hide();
-                                                    $('#toggle_terminees').prop('checked', false);
-                                                    $('#cacher_encours').prop('checked', false);
+                                                    rafraichirtable();
+                                                    $('#hide').hide();
+                                                    $('#toggle_finished').prop('checked', false);
+                                                    $('#hide_ongoing').prop('checked', false);
                                                 } else {
                                                     $('#message').text('Veuillez remplir les champs obligatoires');
                                                 }
@@ -366,10 +342,10 @@ function setDialog(action, nItem) {
                                                             }
                                                         }
                                                     })
-                                                    rafraichirTableau();
-                                                    $('#cacher').hide();
-                                                    $('#toggle_terminees').prop('checked', false);
-                                                    $('#cacher_encours').prop('checked', true);
+                                                    rafraichirtable();
+                                                    $('#hide').hide();
+                                                    $('#toggle_finished').prop('checked', false);
+                                                    $('#hide_ongoing').prop('checked', true);
                                                 } else {
                                                     $('#message').fadeOut();
                                                     $('#message').text('Veuillez remplir les champs obligatoires');
@@ -419,9 +395,9 @@ function setDialog(action, nItem) {
                                     "Enregistrer": function() {
                                         var newClasseur = new Object();
                                         var newTitres = new Object();
-                                        var valRep = $('#c_repertoire').val();
+                                        var valRep = $('#f_directory').val();
                                         newClasseur.titreClasseur = $('#c_titreClasseur')
-                                        newClasseur.nbRepertoire = $('#c_repertoire option[value=' + valRep + ']').text();
+                                        newClasseur.nbRepertoire = $('#f_directory option[value=' + valRep + ']').text();
                                         var rep = newClasseur.nbRepertoire;
                                         newClasseur.titreClasseur = $('#c_titreClasseur').val();
                                         newClasseur.image = $('#image').val();
@@ -442,7 +418,7 @@ function setDialog(action, nItem) {
                                                     // Vider les champs
                                                     $('#message').fadeIn();
                                                     $('#message').text('Le classeur a été ajouté !');
-                                                    rafraichirTableau();
+                                                    rafraichirtable();
                                                     $('#dialog').dialog({
                                                         buttons: {
                                                             Fermer: function() {
@@ -487,8 +463,8 @@ function setDialog(action, nItem) {
                                     "Enregistrer": function() {
                                         var newClasseur = new Object();
                                         var newTitres = new Object();
-                                        var valRep = $('#c_repertoire').val();
-                                        newClasseur.nbRepertoire = $('#c_repertoire option[value=' + valRep + ']').text();
+                                        var valRep = $('#f_directory').val();
+                                        newClasseur.nbRepertoire = $('#f_directory option[value=' + valRep + ']').text();
                                         var rep = newClasseur.nbRepertoire;
                                         for (i = 1; i <= rep; i++) {
                                             var titre = '#c_titre_' + i + ' option:selected';
@@ -512,7 +488,7 @@ function setDialog(action, nItem) {
                                                     $('.ajax-file-upload-statusbar').hide();
                                                     $('#message').fadeIn();
                                                     $('#message').text('Le classeur a été modifié avec succès !');
-                                                    rafraichirTableau();
+                                                    rafraichirtable();
                                                     $('#dialog').dialog({
                                                         buttons: {
                                                             Fermer: function() {
@@ -569,9 +545,9 @@ function setDialog(action, nItem) {
                                                             }
                                                         }
                                                     })
-                                                    $('#toggle_terminees').prop('checked', false);
-                                                    $('#cacher_encours').prop('checked', true);
-                                                    rafraichirTableau();
+                                                    $('#toggle_finished').prop('checked', false);
+                                                    $('#hide_ongoing').prop('checked', true);
+                                                    rafraichirtable();
                                                 } else {
                                                     $('#message').fadeIn();
                                                     $('#message').text('Veuillez remplir les champs obligatoires');
@@ -603,7 +579,7 @@ function setDialog(action, nItem) {
                                         var print = new Object();
                                         var titres = new Object();
                                         print.titreClasseur = $('#c_titre')
-                                        print.nbRepertoire = $('#c_repertoire').val();
+                                        print.nbRepertoire = $('#f_directory').val();
                                         print.image = $('#image').val();
                                         print.tailleImage = $('input[name=tailleImage]:checked').val();
                                         var rep = print.nbRepertoire;
@@ -641,7 +617,7 @@ function setDialog(action, nItem) {
                             break;
                     }
                     iconesBoutons();
-                    rafraichirTitresDialog(nItem);
+                    refreshDialogTitles(nItem);
                     upload();
                     break;
                 case 'images':
@@ -670,7 +646,7 @@ function setDialog(action, nItem) {
                                                             }
                                                         }
                                                     })
-                                                    rafraichirTableau();
+                                                    rafraichirtable();
                                                 } else {
                                                     $('#message').fadeIn();
                                                     $('#message').text('Impossible de supprimer');
@@ -815,25 +791,25 @@ function setDialog(action, nItem) {
             /* Texte masquer ou afficher du lien des titres dans les boîtes de dialogues
              * de la page classeurs */
 
-            $(document).on("click", "#toggle_titres", function() {
+            $(document).on("click", "#toggle_titles", function() {
                 if (toggled) {
-                    $('#toggle_titres').text('(Afficher)');
+                    $('#toggle_titles').text('(Afficher)');
                     toggled = false;
                 } else {
-                    $('#toggle_titres').text('(Masquer)');
+                    $('#toggle_titles').text('(Masquer)');
                     toggled = true;
                 }
-                $('#hidden_titres').toggle();
+                $('#hidden_titles').toggle();
             });
-            $('#toggle_titres').click(function() {
+            $('#toggle_titles').click(function() {
                 if (toggled) {
-                    $('#toggle_titres').text('(Afficher)');
+                    $('#toggle_titles').text('(Afficher)');
                     toggled = false;
                 } else {
-                    $('#toggle_titres').text('(Masquer)');
+                    $('#toggle_titles').text('(Masquer)');
                     toggled = true;
                 }
-                $('#hidden_titres').toggle();
+                $('#hidden_titles').toggle();
             });
             $("#hidden_images").hide();
             $("#isImage").click(function() {
@@ -871,16 +847,16 @@ function toggleDateFin() {
         }
     });
 }
-/* Fonction qui met à jour le tableau des éléments après ajout, modification
+/* Fonction qui met à jour le table des éléments après ajout, modification
  * ou suppression */
-function rafraichirTableau() {
-    $.post("includes/tableau.php")
+function rafraichirtable() {
+    $.post("includes/table.php")
         .done(function(data) {
-            $('.tableaux tbody').remove();
-            $('.tableaux thead').after(data);
+            $('.tables tbody').remove();
+            $('.tables thead').after(data);
             iconesBoutons();
-            $('#toggle_terminees').prop('checked', false);
-            $('#cacher_encours').prop('checked', false);
+            $('#toggle_finished').prop('checked', false);
+            $('#hide_ongoing').prop('checked', false);
         });
 }
 
@@ -939,15 +915,15 @@ function iconesBoutons() {
 
 /* Fonction utilisée pour rafraichir la liste des titres dans les boîtes
  * de dialogue de la page classeurs.php */
-function rafraichirTitresDialog(nItem) {
+function refreshDialogTitles(nItem) {
     if (typeof(nItem) == 'undefined') {
         nItem = '';
     }
-    var nbRep = $('#c_repertoire option:selected').text();
+    var nbRep = $('#f_directory option:selected').text();
     $.post("includes/d_titres.php", { nbRep: nbRep, nItem: nItem })
         .done(function(data) {
-            $('#hidden_titres').children().remove();
-            $('#hidden_titres').append(data);
+            $('#hidden_titles').children().remove();
+            $('#hidden_titles').append(data);
         });
 }
 
