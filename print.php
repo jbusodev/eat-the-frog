@@ -34,20 +34,20 @@ $intNbRepertoire = intval($nbRepertoire);
             <title>Avalez le crapaud - Impression</title>
             <link rel="stylesheet" type="text/css" media="all" href="./css/polices/polices.css" />
             <link rel="icon" href="images/favicon.ico" />
-            
+
             <script type="text/javascript" src="./js/lib/jquery-2.1.1.min.js"></script>
             <script type="text/javascript" src="./js/functions.js"></script>
             <script type="text/javascript" src="./js/events.js"></script>
-            
+
             <!-- jQuery UI -->
             <script type="text/javascript" src="./js/lib/jquery-ui.min.js"></script>
             <link rel="stylesheet" type="text/css" media="all" href="./css/jquery-ui.css" />
-            
+
             <!-- Plugin JS jQuery.print permettant d'imprimer une partie de page
                  trouvé sur https://github.com/DoersGuild/jQuery.print -->
             <script src="./js/plugins/jQuery.print.js"></script>
-        <!-- -------------------------- FIN Plugins --------------------- -->
-            
+        <!-- -------------------------- END Plugins --------------------- -->
+
     </head>
     <body>
         <div id="print">
@@ -106,14 +106,14 @@ $intNbRepertoire = intval($nbRepertoire);
         var repHeight = repHeight;
         var pxH = repHeight + 'px';
         $('#repertoire div').css('line-height', pxH);
-            
+
         $('*').css({
             '-moz-box-sizing'       : 'border-box',
             '-webkit-box-sizing'    : 'border-box',
             'box-sizing'            : 'border-box',
             'font-family'           : 'Raleway-light'
         });
-        
+
         $('#imprimerDos').click(function(){
             $('#dos').print();
         });

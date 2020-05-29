@@ -28,7 +28,7 @@ $reponseTitres = '';
 $reponseImage = '';
 $reponse = '';
 $isInserted = false;
-/* ------------------------- FIN - INITIALISATION DES VARIABLES -------------------- */
+/* ------------------------- END - INITIALISATION DES VARIABLES -------------------- */
 
 
 switch ($action){
@@ -76,8 +76,8 @@ switch ($action){
                         $reponseImage = "OK";
                     }
                     $reponseCl = 'OK';
-                    
-                    
+
+
                 } else {
                     $reponseCl = "Erreur SQL. Impossible d'ajouter le classeur. (classeur.php)";
                 }
@@ -93,8 +93,8 @@ switch ($action){
     case 'edit':
         try{
             if( $nbRepertoire !== '' && $titreClasseur !== '' ){
-                if( $fileName !== '') { 
-                    if( $fileName !== 'NULL' ){    
+                if( $fileName !== '') {
+                    if( $fileName !== 'NULL' ){
                         if( !existeImage($connexion, $fileName)) {
                             // Ajout de l'image si une image a été uploadée
                             if( ajoutImage($connexion, $fileName) ){
@@ -145,7 +145,7 @@ switch ($action){
                 $res_add->execute();
                 $res_add->closeCursor();
                 $reponseCl = 'OK';
-                
+
             } else {
                 $reponseImage = 'ko';
                 $reponseCl = 'ko';
@@ -168,8 +168,8 @@ switch ($action){
             }
             $reponseTitres = $reponseTitresA === 'OK' && $reponseTitresD === 'OK' ? 'OK' : 'ko' ;
             unset($reponseTitresA, $reponseTitresD);
-            
-            
+
+
         } catch(Exception $e){
         }
         break;

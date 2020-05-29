@@ -13,7 +13,7 @@ $intNumero = intval($numero);
 
 cleanString($newTitre);
 
-/* ------------------------- FIN - INITIALISATION DES VARIABLES -------------------- */
+/* ------------------------- END - INITIALISATION DES VARIABLES -------------------- */
     switch ($action){
         case 'add':
             try{
@@ -56,6 +56,6 @@ cleanString($newTitre);
             $reponse = "Action non définie";
             break;
     }
-    
+
 $arr = array('reponse' => $reponse);
 echo json_encode($arr);

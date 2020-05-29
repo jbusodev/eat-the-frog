@@ -24,21 +24,21 @@ $intNumero = intval($numero);
 unset($nomU, $prenomU, $pseudoU, $niveauU, $numero, $newUtilisateur);
 
 
-/* ------------------------- FIN - INITIALISATION DES VARIABLES -------------------- */
+/* ------------------------- END - INITIALISATION DES VARIABLES -------------------- */
     switch ($action){
         case 'add':
             try {
                 $isPwdSame = $pwd === $pwdCheck ? true : false;
                 $reponsePseudo = $isPwdSame ? "" : "<p>Les mots de passe doivent être égaux.</p>";
                 unset($isPwdSame);
-                
+
                 $pattern = '/^[a-zA-Z]+$/';
                 $isPseudoGood = preg_match($pattern, $pseudo) ? true : false;
-                $reponsePwd = $isPseudoGood ? "" : "<p>Le nom d'utilisateur doit s'écrire en un mot sans espaces, contenir uniquement des lettres et aucun caractère accentué.</p>";
+                $responsePwd = $isPseudoGood ? "" : "<p>Le nom d'utilisateur doit s'écrire en un mot sans espaces, contenir uniquement des lettres et aucun caractère accentué.</p>";
                 unset( $isPseudoGood );
-                
+
                 if( $nom !== '' && $prenom !== '' && $pseudo !== '' && $pwd !== '' && $pwdCheck !== '' && $intNiveau !== 0 ) {
-                    if( $reponsePseudo === '' && $reponsePwd === '' ) {
+                    if( $reponsePseudo === '' && $responsePwd === '' ) {
                         if( !existePseudo($connexion, $pseudo) ) {
                             $query_add = "INSERT INTO tbl_users(nomUtilisateur, prenomUtilisateur, pseudo, password, num_tbl_niveaux) VALUES(:nom, :prenom, :pseudo, MD5(:pwd), :niveau)";
                             $res_add = $connexion->prepare($query_add);
@@ -55,7 +55,7 @@ unset($nomU, $prenomU, $pseudoU, $niveauU, $numero, $newUtilisateur);
                             $reponse = "<p>Le nom d'utilisateur est déjà utilisé.</p>";
                         }
                     } else {
-                        $reponse = $reponsePseudo . $reponsePwd;
+                        $reponse = $reponsePseudo . $responsePwd;
                     }
                 } else {
                     $reponse = "Veuillez remplir tous les champs.";
@@ -95,6 +95,6 @@ unset($nomU, $prenomU, $pseudoU, $niveauU, $numero, $newUtilisateur);
             $reponse = "Erreur PHP : Action non définie";
             break;
     }
-    
+
 $arr = array('reponse' => $reponse);
 echo json_encode($arr);

@@ -69,6 +69,7 @@ if( isset($_POST['action']) ){
             $isDateF = 'false';
         }
         echo '<div class="dialogs" id="dialog" title="'. $title .'">';
+            echo '<div class="champs"><div id="message" class="error">'. $delete .'</div></div>';
             echo '<div class="champs c_caches">';
                 echo '<label class="required">Tâche : </label><input type="text" id="c_tache" value="'. $nomTache .'"/>';
             echo '</div>';
@@ -77,14 +78,13 @@ if( isset($_POST['action']) ){
                 listePriorites($connexion, $prioTache);
             echo '</div>';
             echo '<div class="champs c_caches">';
-                echo '<label class="required">Date de début : </label><input type="texts" class="dates" id="c_dateD" value="'. $dateDTache .'"/>';
+                echo '<label class="required">Date de début : </label><input type="text" class="dates" id="c_dateD" value="'. $dateDTache .'" readonly="readonly"/>';
             echo '</div>';
             echo '<div class="champs c_caches">';
-                echo '<label class="inline-block" for="toggle_dateFyes">Terminée : </label><input type="checkbox" id="toggle_dateFyes"/>';
+                echo '<input type="checkbox" id="toggle_dateFyes"/><label class="inline-block" for="toggle_dateFyes">Terminée</label>';
             echo '</div>';
-            echo '<div class="champs" id="hidden_dates"><label>Date de fin : </label><input type="text" class="dates" id="c_dateF" value="'. $dateFTache .'"/></div>';
-            echo '<div class="champs c_caches"><label>Remarque : </label><textarea id="c_remarque" maxlength="120">'. $remTache .'</textarea></div>';
-            echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
+            echo '<div class="champs" id="hidden_dates"><label>Date de fin : </label><input type="text" class="dates" id="c_dateF" value="'. $dateFTache .'" readonly="readonly"/></div>';
+            echo '<div class="champs c_caches"><label>Remarque : </label><textarea id="c_remarque" class="margin_centered" maxlength="120">'. $remTache .'</textarea></div>';
             echo '<input id="page" type="hidden" value="'. $page .'" />';
             echo '<input id="isDateF" type="hidden" value="'. $isDateF .'" />';
         echo '</div>';
@@ -98,7 +98,7 @@ if( isset($_POST['action']) ){
             $obj_user = $res_pseudo->fetch(PDO::FETCH_OBJ);
             $pseudo = $obj_user->pseudo;
             $res_pseudo->closeCursor();
-            
+
             switch($action){
                 case 'add':
                     $title = 'Ajouter un classeur';
@@ -130,34 +130,36 @@ if( isset($_POST['action']) ){
                     $res_edit->closeCursor();
                     break;
             }
+
             if( $action !== 'print' ){
                 echo '<div class="dialogs" id="dialog" title="'. $title .'">';
+                    echo '<div class="champs"><div id="message" class="error">'. $delete .'</div></div>';
                     echo '<div class="champs c_caches">';
                         echo '<label class="required">Titre du classeur : </label><input type="text" id="c_titreClasseur" value="'. $titreClasseur .'"/>';
                     echo '</div>';
                     echo '<div class="champs c_caches">';
                         echo '<label class="required">Nombre de répertoires : </label>';
-                        listeRepertoire($nbRepertoire);
                         echo '<a href="#" class="info">Si vous choisissez un nombre plus petit que le précédent, les titres en surplus seront tronqués(supprimés)</a>';
+                        listeRepertoire($nbRepertoire);
                     echo '</div>';
                     echo '<div class="champs c_caches">';
-                        echo '<label>Titres du répertoire</label><a href="#" id="toggle_titres">(Afficher)</a>';
+                        echo '<label>Titres du répertoire</label><a href="#" id="toggle_titles">(Afficher)</a>';
                     echo '</div>';
-                    echo '<div class="champs" id="hidden_titres">';
+                    echo '<div class="champs" id="hidden_titles">';
                         include_once('../includes/d_titres.php');
                     echo '</div>';
                     echo '<a href="titres.php" style="font-size:10pt;border:none" class="extlink c_caches" title="Vous serez redirigé vers la page gestion des titres">Ajouter des titres</a>';
-                    echo '<div class="champs c_caches ou">';
-                        echo '<label for="isImage">Aucune image</label><input id="isImage" type="checkbox"/>';
+                    echo '<div class="champs c_caches ou center">';
+                        echo '<input id="isImage" type="checkbox"/><label for="isImage">Aucune image</label>';
                     echo '</div>';
                     echo '<div class="champs c_caches noImage ou" style="text-align:center;font-weight:bold">';
                         echo 'OU';
                     echo '</div>';
-                    echo '<div class="champs noImage">';
+                    echo '<div class="champs noImage center">';
                         echo '<a id="choisirImage" href="#" class="c_caches">Choisir une image existante</a>';
                     echo '</div>';
                     echo '<div class="champs" id="hidden_images">';
-                        echo '<table class="tableaux">';
+                        echo '<table class="tables">';
                         include_once('../includes/d_images.php');
                         echo '</table>';
                     echo '</div>';
@@ -170,7 +172,6 @@ if( isset($_POST['action']) ){
                             echo '<div id="status" class="little-font-size"></div>';
                         echo '</div>';
                     }
-                    echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
                     echo '<input id="item" type="hidden" value="'. $nItem .'" />';
                     echo '<input id="pseudo" type="hidden" value="'. $pseudo .'" />';
                     echo '<input id="image" type="hidden" value="" />';
@@ -183,7 +184,7 @@ if( isset($_POST['action']) ){
                         echo '</div>';
                         echo '<div class="champs c_caches">';
                             echo '<label class="required">Nombre de répertoires : </label>';
-                            echo '<input id="c_repertoire" class="input" type="text" value="'. $nbRepertoire .'"/>';
+                            echo '<input id="f_directory" class="input" type="text" value="'. $nbRepertoire .'"/>';
                         echo '</div>';
                         echo '<div class="champs c_caches">';
                             echo '<label>Titres</label>';
@@ -214,6 +215,7 @@ if( isset($_POST['action']) ){
                     break;
             }
             echo '<div class="dialogs" id="dialog" title="'. $title .'">';
+                echo '<div class="champs"><div id="message" class="error">'. $delete .'</div></div>';
                 echo '<p class="c_caches">Les champs marqués d\'une * sont obligatoires</p>';
                 echo '<div class="champs c_caches">';
                     echo '<label class="required">Nom : </label><input type="text" id="c_nom"/>';
@@ -234,7 +236,6 @@ if( isset($_POST['action']) ){
                     echo '<label class="required">Niveau : </label>';
                     listeNiveaux($connexion, $niveau, 0, 1);
                 echo '</div>';
-                echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
                 echo '<input id="item" type="hidden" value="'. $nItem .'" />';
                 echo '<input id="page" type="hidden" value="'. $page .'" />';
             echo '</div>';
@@ -255,7 +256,7 @@ if( isset($_POST['action']) ){
                 echo '<input id="item" type="hidden" value="'. $nItem .'" />';
                 echo '<input id="page" type="hidden" value="'. $page .'" />';
             echo '</div>';
-            
+
             break;
         default:
             break;

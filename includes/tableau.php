@@ -15,6 +15,7 @@ if( isset($_POST['page']) ){
 }
 $aujourdhui = date('Y-m-d');
 $chemin = 'images/classeurs/';
+
 switch ($page){
     case 'taches':
         $query = "SELECT tbl_priorites.priorite, tbl_taches.tache, tbl_taches.dateDebut, tbl_taches.dateFin, tbl_taches.numero, tbl_taches.remarque
@@ -28,7 +29,7 @@ switch ($page){
         while( $ligne = $results->fetch(PDO::FETCH_OBJ) ){
             $dfin = $ligne->dateFin;
             $remarque = $ligne->remarque !== '' ? ' title="'. $ligne->remarque .'"' : '';
-            $terminee = $dfin !== '0000-00-00' && $dfin <= $aujourdhui ? ' class="terminees hidden"' : ' class="encours"';
+            $terminee = $dfin !== '0000-00-00' && $dfin <= $aujourdhui ? ' class="finished hidden"' : ' class="ongoing"';
             $fini = $ligne->dateFin == '0000-00-00' ? '<a class="finir" href="#" id="'. $ligne->numero .'">Terminer</a>': '';
             echo '<tr'. $terminee .'>';
                 echo '<td>'. $ligne->priorite .'</td>';
@@ -40,7 +41,7 @@ switch ($page){
         }
         if( $count=== 0 ){ // Si le résultat de la requête est vide, la valeur FALSE est retournée
             echo '<tr>';
-                echo '<td colspan=5>Aucune tâche pour l\'instant.</td>';
+                echo '<td colspan=5 class="empty">Aucune tâche pour l\'instant.</td>';
             echo '</tr>';
         }
         $results->closeCursor();
@@ -120,7 +121,7 @@ switch ($page){
                 echo '<td>';
                     echo '<input type="button" class="bouton btnDisabled save_user hidden" value="Enregistrer" />';
                     echo '<input type="button" class="bouton btnDisabled del del_user" value="Supprimer" />';
-                echo '</td>';    
+                echo '</td>';
             echo '</tr>';
         echo '</tbody>';
         break;

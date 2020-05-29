@@ -35,7 +35,7 @@ function listePriorites($C, $S = '0'){
     }
     $res->closeCursor();
     echo '</select>';
-    echo '<option value="0"></option>';
+    //echo '<option value="0"></option>';
 }
 
 // Fonction qui liste les nb de répertoires

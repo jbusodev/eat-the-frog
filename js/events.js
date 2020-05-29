@@ -22,6 +22,8 @@ $(document).ready(function() {
             $('#hide').hide();
         }
     });
+
+    // Hide ongoing tasks
     $('#hide_ongoing').click(function() {
         $('.ongoing').toggle();
     });
