@@ -11,8 +11,17 @@ $(document).ready(function() {
 
     /* -------------------------- Tables Events ------------------- */
 
+
+    let tableCell = document.querySelector('td');
+    console.log(tableCell);
+    if (!$(tableCell).hasClass('empty')) {
+        $('#parent-toggle_finished').show();
+    }
+
     // Displays finished tasks
-    $('#hide_ongoing').prop('checked', false);
+    $('#hide_ongoing').prop('checked', false); // unchecks hide ingoing
+    $('#hide').hide();
+
     $('#toggle_finished').click(function() {
         if ($(this).is(':checked')) {
             $('.finished').show();
@@ -71,6 +80,8 @@ $(document).ready(function() {
         var nItem = $(this).attr('id');
         setDialog('delete', nItem);
     });
+
+    // Print function
     $(document).on("click", ".imprint", function() {
         var nItem = $(this).attr('id'); // item's ID is set in nItem
         image = $(this).attr('data-image'); // item's image is set in image

@@ -295,6 +295,14 @@ td .bouton {
     cursor: pointer;
 }
 
+.margin-left {
+    margin-left: .5rem;
+}
+
+.margin-bottom {
+    margin-bottom: .5rem;
+}
+
 .fleft {
     float: left;
 }
@@ -379,7 +387,6 @@ td .bouton {
 .tables {
     border-collapse: collapse;
     background-color: white;
-    border: 1px solid var(--frog);
     width: 100%;
 }
 
@@ -449,22 +456,6 @@ td .bouton {
 
 .cases>span>img {
     max-height: 100%;
-}
-
-
-/* Bootstrap-related classes */
-
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: var(--frog);
-}
-
-.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
-    background-color: var(--frog);
-}
-
-.custom-checkbox .custom-control-input:focus~.custom-control-label::before {
-    /* box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 0, 247, 0.25); */
-    box-shadow: none;
 }
 
 svg>path {

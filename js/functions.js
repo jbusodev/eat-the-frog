@@ -208,7 +208,7 @@ function setDialog(action, nItem) {
                                             },
                                             error: function(data) {
                                                 console.log(data);
-                                                $('#.1response').replaceWith(data.responseText);
+                                                $('#message').replaceWith(data.responseText);
                                             }
                                         });
                                     },

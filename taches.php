@@ -59,13 +59,13 @@
                         <div class="left"><span class="imprint">imprimer</span></div>
                         <h1>Liste des tâches</h1>
 
-                        <div id="" class="hidden custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="toggle_finished" name="example1">
+                        <div id="parent-toggle_finished" class="hidden margin-left margin-bottom inline-block">
+                            <input type="checkbox" id="toggle_finished" name="example1">
                             <label class="custom-control-label" for="toggle_finished">Afficher les tâches terminées</label>
                         </div>
 
-                        <div id="hide" class="hidden custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="hide_ongoing" name="example1">
+                        <div id="hide" class="hidden margin-left margin-bottom inline-block">
+                            <input type="checkbox" id="hide_ongoing" name="example1">
                             <label class="custom-control-label" for="hide_ongoing">Masquer les tâches en cours</label>
                         </div>
                         <!--
