@@ -7,11 +7,6 @@ $page = $_SESSION['page'];
 
 ?>
 <!DOCTYPE html>
-<!-- Le DOCTYPE HTML5 est utilisé pour cette application, certaines balises comme <nav>
-     et <section> n'est valide qu'avec ce DOCTYPE. Liste complète
-     des éléments valides à la page http://www.w3schools.com/tags/ref_html_dtd.asp
-
-     Ce document a été validé en retirant préalablement les balises php du document. -->
 <html lang="fr">
     <head>
             <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -38,19 +33,19 @@ $page = $_SESSION['page'];
                 <div id="login">
                     <h1>Avalez le crapaud</h1>
                     <h2>Connexion</h2>
-                    <label class="loginresponse hidden"></label>
+                    <label class="error hidden"></label>
                     <div style="margin: 0 auto">
                         <div class="champs">
                             <!-- <label for="user">Nom d'utilsateur</label> -->
                             <input id="user" name="user" type="text" placeholder="Nom d'utilisateur"/>
-                            <label class="messagesUser" style="min-width: 0"></label><span id="messageUser" class="messagesUser messages"></span>
+                            <label class="messages messagesUser" style="min-width: 0"></label><span id="messageUser" class="messagesUser messages"></span>
                         </div>
                         <div class="champs">
                             <!-- <label for="password">Mot de passe</label> -->
-                            <input id="password" name="password" type="password" placeholder="Mot de passe"/>
-                            <label class="messagesPwd" style="min-width: 0"></label><span id="messagePwd" class="messagesPwd messages"></span>
+                            <input id="password" class="margin-top" name="password" type="password" placeholder="Mot de passe"/>
+                            <label class="messages messagesPwd" style="min-width: 0"></label><span id="messagePwd" class="messagesPwd messages"></span>
                         </div>
-                        <input id="btnLogin" type="button" class="bouton" value="Connexion"/>
+                        <input id="btnLogin" type="button" class="margin-top bouton" value="Connexion"/>
                     </div>
                 </div>
             </div>

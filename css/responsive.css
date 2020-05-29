@@ -48,23 +48,24 @@ h1, h2 {
     margin: 0.5rem 0;
 }
 
-input, select, textarea {
-    border: 1px solid;
-    border-color: rgb(207, 195, 195);
+input, select, textarea, label {
+    border: 1px solid transparent;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 0.8em;
     color: var(--frog);
-    padding: 0.3rem;
-    vertical-align: middle;
+    padding: 0.6rem;
+    vertical-align: bottom;
+    height: 35px;
 }
 
 input:hover {
     background-color: #E0E0E0;
 }
 
-input:not([type=checkbox]), textarea, .input {
+.bouton, textarea, .input {
     width: 100%;
-    max-width: 200px;
+    max-width: -webkit-max-content;
+    max-width: max-content;
+    max-width: -moz-max-content;
     /* margin: 0 auto; */
 }
 
@@ -72,14 +73,19 @@ textarea, span {
     display: block;
 }
 
-.margin, .bouton {
-    margin-top: 1rem;
+.margin-top {
+    margin-top: 0.6rem;
 }
 
+
+/*
 input[type=text], input[type=password], input[type=email], input[type=checkbox] {
     padding: 1rem 0.5rem;
-    height: 1.8em;
+
+height: 1.8em;
+
 }
+*/
 
 input[type=radio] {
     margin: 0;
@@ -87,14 +93,15 @@ input[type=radio] {
 }
 
 label {
-    line-height: 1.8em;
+    /* line-height: 1.8em; */
     max-width: 100%;
     display: inline-block;
 }
 
 select {
     font-weight: 300;
-    height: 1.8em;
+    text-align: center;
+    background-color: white;
 }
 
 select option[disabled] {
@@ -118,6 +125,53 @@ section ul {
 }
 
 
+/* Custom Checkbox */
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]+label {
+    /* display: block; */
+    /*border: solid 1px rgba(224, 224, 224, 0.75); */
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+input[type="checkbox"]+label:before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: solid 1px var(--frog);
+    position: absolute;
+    left: 0;
+    top: .5rem;
+    opacity: .6;
+    -webkit-transition: all .12s, border-color .08s;
+    transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked+label:before {
+    width: 10px;
+    top: 5px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/*   END Custom Checkbox */
+
+
 /* Classes */
 
 .panels {
@@ -129,15 +183,17 @@ section ul {
 .panels a {
     cursor: pointer;
     color: var(--frog);
-}
-
-.panels a:hover {
-    border-bottom: 1px solid var(--frog);
+    max-height: 100%;
+    max-width: 40px;
 }
 
 .panels>a {
     color: white;
     border-bottom: 1px solid var(--gold);
+}
+
+.del:hover {
+    background-color: var(--gold-bright);
 }
 
 .hidden {
@@ -161,15 +217,14 @@ section ul {
     text-align: center;
 }
 
-.messages {
-    display: none;
-    text-shadow: none;
-    text-align: center;
+.margin_centered {
+    margin: 0 auto;
 }
 
-.loginresponse {
+.error {
     border: 0.1rem solid rgb(105, 105, 105);
     background-color: rgb(243, 118, 122);
+    text-align: center;
     color: rgb(58, 58, 58);
     padding: 0.4rem;
     width: 100%;
@@ -202,17 +257,25 @@ section ul {
     white-space: nowrap;
 }
 
+td .bouton {
+    margin-top: 0;
+}
+
+.del {
+    background-color: var(--orange);
+}
+
 
 /* disabled buttons */
 
 
 /*
-.bouton[disabled], .bouton[disabled]:hover {
-    background-color: #999;
-    cursor: default;
-    opacity: 0.6;
-}
-*/
+    .bouton[disabled], .bouton[disabled]:hover {
+        background-color: #999;
+        cursor: default;
+        opacity: 0.6;
+    }
+    */
 
 .bouton:hover {
     background-color: var(--gold-bright);
@@ -248,7 +311,12 @@ section ul {
     display: none;
 }
 
-.champs {
+.dialogs select, .dialogs input:not([type="checkbox"]) {
+    width: 100%;
+    max-width: inherit;
+}
+
+.dialogs .champs {
     display: block;
     margin-top: .6rem;
 }
@@ -308,30 +376,30 @@ section ul {
     width: 100%;
 }
 
-.tableaux {
+.tables {
     border-collapse: collapse;
     background-color: white;
     border: 1px solid var(--frog);
     width: 100%;
 }
 
-.tableaux thead {
+.tables thead {
     background-color: var(--frog);
     border-bottom: 3px solid var(--frog-bright);
     color: white;
 }
 
-.tableaux thead th {
+.tables thead th {
     padding: 0.5em;
     text-align: center;
 }
 
-.tableaux thead th:hover {
+.tables thead th:hover {
     background-color: var(--frog-bright);
     cursor: pointer;
 }
 
-.tableaux>tbody>tr>td {
+.tables>tbody>tr>td {
     padding: 5px 10px;
     text-align: center;
     border-right: 1px dashed var(--frog)8;
@@ -339,27 +407,26 @@ section ul {
     cursor: default;
 }
 
-.tableaux>tbody>tr>td>a {
+.tables>tbody>tr>td>a {
     color: var(--frog);
     margin: 0 0.5em;
 }
 
-.tableaux>tbody>tr>td>img {
+.tables>tbody>tr>td>img {
     margin: 0 auto;
     width: 100%;
 }
 
-.tableaux>tbody img {
-    width: 100%;
+.tables>tbody img {
     max-width: 4cm;
     max-height: 4.5cm;
 }
 
-.tableaux .col_230 {
+.tables .col_230 {
     width: 230px;
 }
 
-.tableaux>ul>li>ul>li {
+.tables>ul>li>ul>li {
     padding: 0 0.5em;
 }
 
@@ -404,8 +471,16 @@ svg>path {
     cursor: pointer;
 }
 
+.imprint {
+    background-color: var(--frog);
+}
 
-/* Fin classes */
+.imprint * {
+    color: white;
+}
+
+
+/* END classes */
 
 
 /* Login */
@@ -414,8 +489,14 @@ svg>path {
     display: block;
 }
 
+.messages {
+    display: none;
+    text-shadow: none;
+    text-align: center;
+}
 
-/* FIN Login */
+
+/* END Login */
 
 
 /* Barre de menu */
@@ -467,7 +548,7 @@ svg>path {
 }
 
 
-/* FIN Barre de menu */
+/* END Barre de menu */
 
 #menu_wrapper {
     display: block;
@@ -483,19 +564,20 @@ svg>path {
     display: none;
     position: absolute;
     right: 0;
-    width: 62px;
-    height: 62px;
     background-color: var(--frog);
-    border-left: 2px solid #293E6A;
+    border-left: 2px solid var(--frog-bright);
+    border-bottom: 2px solid var(--frog-bright);
 }
 
 #menu_toggle img {
     position: relative;
-    top: 16px;
     cursor: pointer;
+    padding: 15px;
+    vertical-align: middle;
 }
 
 #message {
+    display: none;
     text-shadow: none;
     font-weight: bold;
 }
@@ -540,12 +622,15 @@ svg>path {
 }
 
 #add {
-    margin-bottom: 5em;
+    margin-top: 1rem;
 }
 
 .add {
     cursor: pointer;
-    color: var(--frog);
+}
+
+.add:hover {
+    color: var(--frog-bright);
 }
 
 .bi {
@@ -561,15 +646,15 @@ svg {
     color: white;
 }
 
-#hidden_dates, #hidden_titres {
+#hidden_dates, #hidden_titles {
     display: none;
 }
 
-#hidden_titres select {
+#hidden_titles select {
     width: 100%;
 }
 
-#toggle_titres {
+#toggle_titles {
     color: var(--frog);
     padding-left: 0.3em;
 }
@@ -657,7 +742,7 @@ svg {
 }
 
 
-/* FIN Pied de page */
+/* END Pied de page */
 
 
 /* Options Responsive */
@@ -717,7 +802,7 @@ svg {
     .first {
         padding: 0;
     }
-    .tableaux thead {
+    .tables thead {
         font-size: 10pt;
     }
     #dialog {
@@ -727,7 +812,7 @@ svg {
         width: 100%;
         display: block;
     }
-    .champs>.input, .champs>input {
+    .champs>.input, .champs>input:not([type="checkbox"]) {
         display: block;
         width: 100%;
         max-width: none;
@@ -736,7 +821,7 @@ svg {
         min-width: 0;
     }
     #add {
-        margin-bottom: 5em;
+        margin-bottom: 0.5em;
     }
     #pied, #pied .cells {
         display: block;
@@ -769,7 +854,7 @@ svg {
 }
 
 
-/* FIN Options Responsive*/
+/* END Options Responsive*/
 
 
 /* Colorpalette */

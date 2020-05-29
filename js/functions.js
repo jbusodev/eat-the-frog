@@ -5,7 +5,7 @@ function checkCredentials() {
     let password = document.getElementById('password');
 
     // error message
-    let errormessage = document.getElementsByClassName('loginresponse');
+    let errormessage = document.getElementsByClassName('error');
 
     username.focus();
 
@@ -152,10 +152,8 @@ function setDefaultDatepicker() {
     $.datepicker.setDefaults($.datepicker.regional['fr']);
 }
 
-/** Dialogs function. Including
- * - addition
- * - edition
- * - deletion
+/** Dialogs function. Including:
+ * addition, edition, deletion
  * of different elements
  * (tasks | folders | titles)
  * */
@@ -428,7 +426,7 @@ function setDialog(action, nItem) {
                                                     })
                                                 } else {
                                                     $('#message').fadeIn();
-                                                    $('#message').replaceWith(data.reponse);
+                                                    $('#message').text('Veuillez remplir les champs obligatoires');
                                                 }
 
                                             },
@@ -847,10 +845,11 @@ function toggleDateFin() {
         }
     });
 }
-/* Fonction qui met à jour le table des éléments après ajout, modification
- * ou suppression */
+/**
+ * Fonction qui met à jour le table des éléments après
+ * ajout, modification ou suppression */
 function rafraichirtable() {
-    $.post("includes/table.php")
+    $.post("includes/tableau.php")
         .done(function(data) {
             $('.tables tbody').remove();
             $('.tables thead').after(data);

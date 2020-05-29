@@ -32,7 +32,7 @@ if($nbRepertoire !== ''){
     } else {
         $count = 0;
     }
-    
+
     echo '<div class="cells">';
     for($i = 1; $i <$intNbR+1; $i++){
         $chronologie = '';
@@ -62,5 +62,5 @@ if($nbRepertoire !== ''){
     }
     echo '</div>';
 } else {
-    echo '<div class="little_font-size">Veuillez sélectionner un nombre de répertoires</div>';
+    echo '<div class="error">Veuillez sélectionner un nombre de répertoires</div>';
 }

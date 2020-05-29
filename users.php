@@ -1,35 +1,8 @@
 <?php
-session_start();
-require_once ('calls/functions.php');
-require_once('connexionPDO.php');
-$nom = $_SESSION['nomUtilisateur'];
-$prenom = $_SESSION['prenomUtilisateur'];
-$user = isset( $_SESSION['user'] ) ? $_SESSION['user'] : header('Location: index.php');
-$_SESSION['page'] = 'users';
-$page = $_SESSION['page'];
-
-$menu_utilisateurs = '';
-$mode = '<b>utilisateur</b>';
-$messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span style=\"text-align:right\">Vous êtes connecté en tant qu' $mode</span></div>"; 
-//Vérification du niveau de l'utilisateur authentifié
-if ( isset($_SESSION['niveau']) ) {
-    $niveau = $_SESSION['niveau'];
-    if ( $niveau == 1 || $niveau == 2 ) {
-        $menu_utilisateurs = '<li><a class="liens active" href="#">Utilisateurs</a></li>';
-        $menu_images = '<li liens ><a class="liens" href="images.php">Gestionnaire d\'images</a></li>';
-        if($niveau == 1) {
-            $mode = '<b>Super Administrateur</b>';
-            $messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span>Vous êtes connecté en tant que $mode</span></div>";
-        }
-        if($niveau == 2){
-            $mode = '<b>Administrateur</b>';
-            $messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span>Vous êtes connecté en tant qu' $mode</span></div>"; 
-        }       
-    }
-}
+    require_once('includes/header.php');
 ?>
-<!DOCTYPE html> 
-<!-- Le DOCTYPE HTML5 est utilisé pour cette application, certaines balises comme <nav> 
+<!DOCTYPE html>
+<!-- Le DOCTYPE HTML5 est utilisé pour cette application, certaines balises comme <nav>
      et <section> n'est valide qu'avec ce DOCTYPE. Liste complète
      des éléments valides à la page http://www.w3schools.com/tags/ref_html_dtd.asp
 
@@ -42,11 +15,11 @@ if ( isset($_SESSION['niveau']) ) {
             <link rel="stylesheet" type="text/css" media="all" href="./css/responsive.css" />
             <link rel="stylesheet" type="text/css" media="all" href="./css/polices/polices.css" />
 			<link rel="icon" href="images/favicon.ico" />
-            
+
             <script type="text/javascript" src="./js/lib/jquery-2.1.1.min.js"></script>
             <script type="text/javascript" src="./js/functions.js"></script>
             <script type="text/javascript" src="./js/events.js"></script>
-            
+
             <!-- jQuery UI -->
             <script type="text/javascript" src="./js/lib/jquery-ui.min.js"></script>
             <link rel="stylesheet" type="text/css" media="all" href="./css/jquery-ui.css" />
@@ -74,7 +47,7 @@ if ( isset($_SESSION['niveau']) ) {
                 <div class="panels first">
                     <?php echo $messageLogin; ?>
                     <h1>Gestion des utilisateurs</h1>
-                    <table class="tableaux">
+                    <table class="tables">
                         <thead>
                             <tr>
                                 <th>Utilisateur</th>
@@ -86,8 +59,12 @@ if ( isset($_SESSION['niveau']) ) {
                         include_once('includes/tableau.php');
                     ?>
                     </table>
+                    <!--
                     <div id="add"><span class="add" title="Ajouter un nouvel utilisateur">+</span><span id="messageUser"></span></div>
-                    
+                    -->
+                    <svg id="add" class="bi bi-plus-square-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path class="add" title="Ajouter une nouvelle tâche" fill-rule="evenodd" d="M2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2zm6.5 4a.5.5 0 00-1 0v3.5H4a.5.5 0 000 1h3.5V12a.5.5 0 001 0V8.5H12a.5.5 0 000-1H8.5V4z" clip-rule="evenodd"/>
+                    </svg>
                 </div>
             </section>
         </div>
@@ -95,4 +72,4 @@ if ( isset($_SESSION['niveau']) ) {
             require_once('includes/pied.php');
         ?>
     </body>
-</html> 
+</html>
