@@ -26,10 +26,10 @@ function listePriorites($C, $S = '0'){
     $query = "SELECT * FROM tbl_priorites";
     $res = $C->prepare($query);
     $res->execute();
-    
+
     echo '<select id="c_priorite">';
     echo '<option value="0"></option>';
-    while( $ligne = $res->fetch(PDO::FETCH_OBJ) ){ 
+    while( $ligne = $res->fetch(PDO::FETCH_OBJ) ){
        $selected = $S == $ligne->numero ? 'selected=\"selected\"' : '';
         echo '<option '. $selected .' value="'. $ligne->numero .'" title="'. $ligne->remarque .'" >'. $ligne->priorite .'</option>';
     }
@@ -60,7 +60,7 @@ function listeRepertoire($NbR = ''){
             $fourth_selected = '';
             break;
     }
-    echo '<select id="c_repertoire">';
+    echo '<select id="f_directory">';
     echo '<option value="0"></option>';
     echo '<option value="1"'. $first_selected .'>10</option>';
     echo '<option value="2"'. $sec_selected .'>11</option>';
@@ -74,16 +74,16 @@ function listeRepertoire($NbR = ''){
 /* Les paramètres $User et $Selectionne servent à définir les données
      * selon SQL pour une facilité de traitement lors des opérations
      * d'ajout/suppression dans la page users */
-    
+
     // $User est le numero d'utilisateur à qui apartient ce niveau
-    
+
     /* $Selectionne est le numero du niveau de l'utilisateur à qui apartient ce niveau.
      * Sert à titre de comparaison lors de la selection d'un autre item que celui-ci */
-    
+
     /* $isAlone est un booléen servant à determiner si la liste sera utilisée et
      * comparée(changement de niveau) : false. Ou alors utilisée seule dans une formulaire (ajout d'utilisateur) : true
      */
-function listeNiveaux($Connexion, $Niveau, $User = '0', $Selectionne = '0', $isAlone = true){ 
+function listeNiveaux($Connexion, $Niveau, $User = '0', $Selectionne = '0', $isAlone = true){
     $paramUser = '';
     $paramInit = '';
     $name = 'c_niveaux';
@@ -99,7 +99,7 @@ function listeNiveaux($Connexion, $Niveau, $User = '0', $Selectionne = '0', $isA
     if( $Selectionne == 0 ){
         echo '<option value="0"></option>';
     }
-    while( $ligne = $res->fetch(PDO::FETCH_OBJ) ){ 
+    while( $ligne = $res->fetch(PDO::FETCH_OBJ) ){
         $selected = $Selectionne == $ligne->numero ? 'selected="selected"' : '';
         // On cache le niveau s'il est super administrateur ou égal à celui de l'utilisateur utilisant l'application présentement
         $disabled = $ligne->numero == 1 || $ligne->numero == $Niveau ? true : false;
@@ -132,17 +132,17 @@ function listeTitres($Connexion, $Indice, $Selectionne = '0'){
     $query_titres = "SELECT * FROM tbl_titres";
     $res_titres = $Connexion->prepare($query_titres);
     $res_titres->execute();
-    
+
     echo '<select class="c_titres input" id="c_titre_'. $Indice .'">';
     echo '<option value="0" selected>Titre '. $Indice .'</option>';
-    while( $ligne = $res_titres->fetch(PDO::FETCH_OBJ) ){ 
+    while( $ligne = $res_titres->fetch(PDO::FETCH_OBJ) ){
         $selected = $Selectionne == $ligne->numero ? 'selected="selected"' : '';
         $numTitre = $ligne->numero;
         $nomTitre = $ligne->titre;
         echo '<option '. $selected .' value='. $numTitre .'>'. $nomTitre .'</option>';
-        
-        $arrA = array($numTitre => $nomTitre); // Nouvelle position du tableau
-        $arrTitres = arrayMergeKeepKeys($arrA, $arrTitres); // Concatène le tableau avec la nouvelle position
+
+        $arrA = array($numTitre => $nomTitre); // Nouvelle position du table
+        $arrTitres = arrayMergeKeepKeys($arrA, $arrTitres); // Concatène le table avec la nouvelle position
     }
     echo '</select>';
     $res_titres->closeCursor();
@@ -170,7 +170,7 @@ function ajoutClasseur($C, $iUser, $iNbRep, $strClasseur, $iImage = ''){
     return true;
 }
 
-/* Requête SQL d'ajout des titres d'un classeur. Retourne true si 
+/* Requête SQL d'ajout des titres d'un classeur. Retourne true si
  * effectuée avec succès */
 function ajoutTitres($C, $tabTitres, $iNumClasseur){
     if ($tabTitres !== '') {
@@ -278,7 +278,15 @@ function fileName(&$Str){
     * ':'pour les noms de fichiers par un tiret bas '_' */
     return $Str;
 }
-/* ------------ FIN Fonctions relatives au traitement des images --------*/
+/* ------------ END Fonctions relatives au traitement des images --------*/
+
+function getCurrentPage(&$Str) {
+    $pattern_ext = '/\.php|\.html+[a-zA-Z?=]*/';
+    $pattern_start = '/(localhost)?(\/)?(\w)+(\/)/';
+    $Str = preg_replace($pattern_ext, "", $Str); // trims extension + args
+    $Str = preg_replace($pattern_start, "", $Str); // trim folder
+    return $Str;
+}
 
 /* Fonction qui nettoie les chaînes de caractères */
 function cleanString(&$Str, $spaceAutorized = true){
@@ -289,7 +297,7 @@ function cleanString(&$Str, $spaceAutorized = true){
     $Str = trim($Str, "-" );
     $Str = preg_replace('#<[^>]+>#','',$Str); // retire les balises html
     $Str = preg_replace('/[\$\/*\#`\^\<\>\=\(\)\|\[\]\{\}\:\.\,\?\+\%]/', '', $Str);
-    /* retire les caractères spéciaux suivants : $, /, %, ', ", `, ^, =, (, ), |, [, ], {, } 
+    /* retire les caractères spéciaux suivants : $, /, %, ', ", `, ^, =, (, ), |, [, ], {, }
      */
     while(strchr($Str,'\\')) {
         $Str = stripslashes($Str);
@@ -299,9 +307,9 @@ function cleanString(&$Str, $spaceAutorized = true){
 }
 
 /* Fonction équivalente à array_merge mais qui laisse les clés intactes
- * array_merge fusionne plusieurs tableaux ensemble mais supprime les clés présentes
- * dans le premier tableau et met des clés par numéro croissant
- * 
+ * array_merge fusionne plusieurs tables ensemble mais supprime les clés présentes
+ * dans la première table et met des clés par numéro croissant
+ *
  * Récupérée sur http://php.net/manual/fr/function.array-merge.php
  * Commentaire de Frederick.Lemasson{AT}kik-it.com
  */
