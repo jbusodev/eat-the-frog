@@ -203,7 +203,8 @@ function setDialog(action, nItem) {
                                                     $('#toggle_finished').prop('checked', false);
                                                     $('#hide_ongoing').prop('checked', false);
                                                 } else {
-                                                    $('#message').text('Veuillez remplir les champs obligatoires');
+                                                    $('#message').addClass('error');
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
                                             },
                                             error: function(data) {
@@ -240,12 +241,14 @@ function setDialog(action, nItem) {
                                             dataType: "json",
                                             success: function(data) {
                                                 if (data.reponse !== 'ko') {
+                                                    // refreshes UI upon succesful request
                                                     $('#c_tache').val('');
                                                     $('#c_priorite option[value=0]').prop('selected', true);
                                                     $('#c_dateD').val(data.aujourdhui);
                                                     $('#c_dateF').val(data.aujourdhui);
                                                     $('#c_remarque').val('');
                                                     $('#message').fadeIn();
+                                                    $('.error').toggleClass('success');
                                                     $('#message').text(data.reponse);
                                                     rafraichirtable();
                                                     $('#hide').hide();
@@ -253,8 +256,9 @@ function setDialog(action, nItem) {
                                                     $('#hide_ongoing').prop('checked', false);
                                                     return;
                                                 } else {
+                                                    $('#message').addClass('error');
                                                     $('#message').fadeIn();
-                                                    $('#message').text('Veuillez remplir les champs obligatoires');
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
 
                                             },
@@ -303,7 +307,8 @@ function setDialog(action, nItem) {
                                                     $('#toggle_finished').prop('checked', false);
                                                     $('#hide_ongoing').prop('checked', false);
                                                 } else {
-                                                    $('#message').text('Veuillez remplir les champs obligatoires');
+                                                    $('#message').addClass('error');
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
                                             },
                                             error: function(data) {
@@ -345,8 +350,9 @@ function setDialog(action, nItem) {
                                                     $('#toggle_finished').prop('checked', false);
                                                     $('#hide_ongoing').prop('checked', true);
                                                 } else {
-                                                    $('#message').fadeOut();
-                                                    $('#message').text('Veuillez remplir les champs obligatoires');
+                                                    $('#message').addClass('error');
+                                                    $('#message').fadeIn();
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
 
                                             },
@@ -425,8 +431,9 @@ function setDialog(action, nItem) {
                                                         }
                                                     })
                                                 } else {
+                                                    $('#message').addClass('error');
                                                     $('#message').fadeIn();
-                                                    $('#message').text('Veuillez remplir les champs obligatoires');
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
 
                                             },
@@ -547,8 +554,9 @@ function setDialog(action, nItem) {
                                                     $('#hide_ongoing').prop('checked', true);
                                                     rafraichirtable();
                                                 } else {
+                                                    $('#message').addClass('error');
                                                     $('#message').fadeIn();
-                                                    $('#message').text('Veuillez remplir les champs obligatoires');
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
 
                                             },

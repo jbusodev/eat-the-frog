@@ -184,7 +184,6 @@ input[type="checkbox"]:checked+label:before {
     cursor: pointer;
     color: var(--frog);
     max-height: 100%;
-    max-width: 40px;
 }
 
 .panels>a {
@@ -222,12 +221,17 @@ input[type="checkbox"]:checked+label:before {
 }
 
 .error {
+    display: none;
     border: 0.1rem solid rgb(105, 105, 105);
     background-color: rgb(243, 118, 122);
     text-align: center;
     color: rgb(58, 58, 58);
     padding: 0.4rem;
     width: 100%;
+}
+
+.success {
+    background-color: lightgreen;
 }
 
 .col_230 {
@@ -568,7 +572,6 @@ svg>path {
 }
 
 #message {
-    display: none;
     text-shadow: none;
     font-weight: bold;
 }

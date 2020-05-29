@@ -69,7 +69,7 @@ if( isset($_POST['action']) ){
             $isDateF = 'false';
         }
         echo '<div class="dialogs" id="dialog" title="'. $title .'">';
-            echo '<div class="champs"><div id="message" class="error">'. $delete .'</div></div>';
+            echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
             echo '<div class="champs c_caches">';
                 echo '<label class="required">Tâche : </label><input type="text" id="c_tache" value="'. $nomTache .'"/>';
             echo '</div>';
@@ -133,7 +133,7 @@ if( isset($_POST['action']) ){
 
             if( $action !== 'print' ){
                 echo '<div class="dialogs" id="dialog" title="'. $title .'">';
-                    echo '<div class="champs"><div id="message" class="error">'. $delete .'</div></div>';
+                    echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
                     echo '<div class="champs c_caches">';
                         echo '<label class="required">Titre du classeur : </label><input type="text" id="c_titreClasseur" value="'. $titreClasseur .'"/>';
                     echo '</div>';
