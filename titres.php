@@ -39,7 +39,7 @@
                     <ul class="fleft">
                         <li><a class="liens" href="taches.php">Tâches</a></li>
                         <li><a class="liens" href="classeurs.php">Classeurs</a></li>
-                        <li><a class="liens active" href="d_titres.php">Titres</a></li>
+                        <li><a class="liens active" href="titres.php">Titres</a></li>
                         <?php echo $menu_images; ?>
                         <?php echo $menu_utilisateurs; ?>
                     </ul>

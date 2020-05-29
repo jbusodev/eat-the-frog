@@ -54,7 +54,7 @@ input, select, textarea, label {
     color: var(--frog);
     padding: 0.6rem;
     vertical-align: bottom;
-    height: 35px;
+    min-height: 35px;
 }
 
 input:hover {

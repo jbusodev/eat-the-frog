@@ -13,7 +13,6 @@ $(document).ready(function() {
 
 
     let tableCell = document.querySelector('td');
-    console.log(tableCell);
     if (!$(tableCell).hasClass('empty')) {
         $('#parent-toggle_finished').show();
     }
@@ -55,7 +54,10 @@ $(document).ready(function() {
     /* -------------------------- Dialog Events ------------------- */
 
     // datepicker Default Settings
-    setDefaultDatepicker();
+    if (window.location.href.match('/taches|classeurs/g')) {
+        setDefaultDatepicker();
+    }
+
 
 
     // Mark a task as finished
