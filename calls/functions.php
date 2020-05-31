@@ -202,10 +202,10 @@ function suppressionTitres($C, $iNumClasseur){
 }
 
 /* ------------ Fonctions relatives au traitement des images --------*/
-function existeImage($C, $fileName){
+function existeImage($C, $FileName){
     $query = "SELECT nomImage FROM tbl_images WHERE nomImage = :image";
         $res = $C->prepare($query);
-        $res->bindValue(":image", $fileName, PDO::PARAM_STR);
+        $res->bindValue(":image", $FileName, PDO::PARAM_STR);
         $res->execute();
         $result = $res->fetch(PDO::FETCH_OBJ);
         if($result != NULL) {
@@ -214,6 +214,19 @@ function existeImage($C, $fileName){
         else {
             return false;
         }
+}
+
+function imageSelected($C, $iID = '') {
+    $query = "SELECT nomImage FROM tbl_images WHERE numero = :id";
+    $res = $C->prepare($query);
+    $res->bindValue(":id", $iID, PDO::PARAM_INT);
+    $res->execute();
+    $result = $res->fetch(PDO::FETCH_OBJ);
+    if ($result != NULL) {
+        return $result->nomImage;
+    }
+    $res->closeCursor();
+    return;
 }
 
 function existePseudo($Connexion, $Pseudo){

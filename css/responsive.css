@@ -333,6 +333,10 @@ td .bouton {
     margin-top: .6rem;
 }
 
+.dialogs .error {
+    font-size: 1rem;
+}
+
 .cells {
     width: 100%;
 }
@@ -340,6 +344,10 @@ td .bouton {
 .cells .c_titres {
     display: block;
     width: 100%;
+}
+
+#hidden_titles .error {
+    display: block;
 }
 
 .required:after {

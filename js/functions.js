@@ -152,12 +152,12 @@ function setDefaultDatepicker() {
     $.datepicker.setDefaults($.datepicker.regional['fr']);
 }
 
+
 /** Dialogs function. Including:
  * addition, edition, deletion
  * of different elements
  * (tasks | folders | titles)
  * */
-
 function setDialog(action, nItem) {
     // Valeur par défaut pour le paramètre precision
     if (typeof(nItem) == 'undefined') {
@@ -399,18 +399,21 @@ function setDialog(action, nItem) {
                                     "Enregistrer": function() {
                                         var newClasseur = new Object();
                                         var newTitres = new Object();
-                                        var valRep = $('#f_directory').val();
-                                        newClasseur.titreClasseur = $('#c_titreClasseur')
-                                        newClasseur.nbRepertoire = $('#f_directory option[value=' + valRep + ']').text();
-                                        var rep = newClasseur.nbRepertoire;
+                                        var valRep = $('#f_directory').val(); // directry select item value != to directory number
+                                        // Gets fields values
                                         newClasseur.titreClasseur = $('#c_titreClasseur').val();
-                                        newClasseur.image = $('#image').val();
+                                        newClasseur.nbRepertoire = $('#f_directory option[value=' + valRep + ']').text(); // Gets directory number desired
+                                        let rep = newClasseur.nbRepertoire;
                                         for (i = 1; i <= rep; i++) {
                                             var titre = '#c_titre_' + i + ' option:selected';
                                             var valTitre = $(titre).val();
                                             if (valTitre !== "0") {
                                                 newTitres[i] = valTitre;
                                             }
+                                        }
+                                        newClasseur.image = $('#image').val(); // Either NULL or a filename ( NULL | user_YYYY-MM-DD_H )
+                                        if (newClasseur.image !== null && newClasseur.image !== '') {
+                                            newClasseur.idImage = $('input[name="choixImage"]:checked').attr('data-img');
                                         }
                                         $.ajax({
                                             type: 'POST',
@@ -420,6 +423,7 @@ function setDialog(action, nItem) {
                                             success: function(data) {
                                                 if (data.reponse == 'OK') {
                                                     // Vider les champs
+                                                    $('#message').removeClass('error');
                                                     $('#message').fadeIn();
                                                     $('#message').text('Le classeur a été ajouté !');
                                                     rafraichirtable();
@@ -431,6 +435,8 @@ function setDialog(action, nItem) {
                                                         }
                                                     })
                                                 } else {
+                                                    console.clear();
+                                                    console.log(data);
                                                     $('#message').addClass('error');
                                                     $('#message').fadeIn();
                                                     $('#message').text('Veuillez remplir les champs obligatoires.');
@@ -439,7 +445,7 @@ function setDialog(action, nItem) {
                                             },
                                             error: function(data) {
                                                 console.log(data);
-                                                $('#message').replaceWith(data.responseText);
+                                                $('#message').text(data.responseText);
                                             }
                                         });
                                     },
@@ -470,6 +476,8 @@ function setDialog(action, nItem) {
                                         var newTitres = new Object();
                                         var valRep = $('#f_directory').val();
                                         newClasseur.nbRepertoire = $('#f_directory option[value=' + valRep + ']').text();
+
+                                        // Gathers the titles list 1 by 1 in the Object : newTitres
                                         var rep = newClasseur.nbRepertoire;
                                         for (i = 1; i <= rep; i++) {
                                             var titre = '#c_titre_' + i + ' option:selected';
@@ -480,6 +488,10 @@ function setDialog(action, nItem) {
                                         }
                                         newClasseur.titreClasseur = $('#c_titreClasseur').val();
                                         newClasseur.image = $('#image').val();
+                                        if (newClasseur.image !== null && newClasseur.image !== '') {
+                                            newClasseur.idImage = $('input[name="choixImage"]:checked').attr('data-img');
+                                        }
+
                                         $.ajax({
                                             type: 'POST',
                                             url: 'calls/classeur.php',
@@ -491,6 +503,7 @@ function setDialog(action, nItem) {
                                                     $('#status').text('');
                                                     $('#status').hide();
                                                     $('.ajax-file-upload-statusbar').hide();
+                                                    $('#message').removeClass('error');
                                                     $('#message').fadeIn();
                                                     $('#message').text('Le classeur a été modifié avec succès !');
                                                     rafraichirtable();
@@ -502,14 +515,17 @@ function setDialog(action, nItem) {
                                                         }
                                                     })
                                                 } else {
+                                                    console.clear();
+                                                    console.log(data);
+                                                    $('#message').addClass('error');
                                                     $('#message').fadeIn();
-                                                    $('#message').replaceWith(data.reponse);
+                                                    $('#message').text('Veuillez remplir les champs obligatoires.');
                                                 }
 
                                             },
                                             error: function(data) {
                                                 console.log(data);
-                                                $('#message').replaceWith(data.responseText);
+                                                $('#message').text(data);
                                             }
                                         });
                                     },
@@ -780,7 +796,7 @@ function setDialog(action, nItem) {
                     break;
             }
 
-            /* ----------------- Evenement relatifs aux boîtes de dialogue ------------- */
+            /* ----------------- Dialogs - Internal Events  ------------- */
             // Activation du calendrier aux champs dates
             $('.dates').datepicker();
 
@@ -807,6 +823,7 @@ function setDialog(action, nItem) {
                 }
                 $('#hidden_titles').toggle();
             });
+
             $('#toggle_titles').click(function() {
                 if (toggled) {
                     $('#toggle_titles').text('(Afficher)');
@@ -817,22 +834,38 @@ function setDialog(action, nItem) {
                 }
                 $('#hidden_titles').toggle();
             });
+
             $("#hidden_images").hide();
+
+            // hides image controls if no image - folder edit
+            if (document.getElementById('isImage').checked) {
+                $("#image").val('NULL');
+                $(".noImage").toggle();
+                $("#boxUpload").toggle();
+                $("#hidden_images").hide();
+            } else {
+                $("#image").val('');
+            }
+
+
             $("#isImage").click(function() {
                 if (document.getElementById('isImage').checked) {
                     $("#image").val('NULL');
                 } else {
                     $("#image").val('');
                 }
+                $('input[name="choixImage"]').prop("checked", false);
                 $(".noImage").toggle();
                 $("#boxUpload").toggle();
                 $("#hidden_images").hide();
             });
+            // hides image controls when 'pick existing image' clicked
             $("#choisirImage").click(function() {
                 $(".ou").toggle();
                 $("#hidden_images").toggle();
                 $("#boxUpload").toggle();
             });
+            // change image hidden field value when existing image changed
             $("input[name=choixImage]").click(function() {
                 var selected = $(this).val();
                 $("#image").val(selected);
@@ -1183,4 +1216,21 @@ function eventsUsers() {
             $('.save_user').prop('disabled', true);
         }
     });
+}
+
+// Debug function
+function dump(obj) {
+    var out = '';
+    for (var i in obj) {
+        out += i + ": " + obj[i] + "\n";
+    }
+
+    alert(out);
+
+
+    /*
+    var pre = document.createElement('pre');
+    pre.innerHTML = out;
+    document.body.appendChild(pre)
+    */
 }

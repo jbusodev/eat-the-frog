@@ -30,13 +30,13 @@ switch ($page){
             $dfin = $ligne->dateFin;
             $remarque = $ligne->remarque !== '' ? ' title="'. $ligne->remarque .'"' : '';
             $terminee = $dfin !== '0000-00-00' && $dfin <= $aujourdhui ? ' class="finished hidden"' : ' class="ongoing"';
-            $fini = $ligne->dateFin == '0000-00-00' ? '<a class="finir" href="#" id="'. $ligne->numero .'">Terminer</a>': '';
+            $fini = $ligne->dateFin == '0000-00-00' ? '<a class="finir" href="#" data-id="'. $ligne->numero .'">Terminer</a>': '';
             echo '<tr'. $terminee .'>';
                 echo '<td>'. $ligne->priorite .'</td>';
                 echo '<td'. $remarque .'>'. $ligne->tache .'</td>';
                 echo '<td>'. afficheDate($ligne->dateDebut) .'</td>';
                 echo '<td>'. afficheDate($ligne->dateFin) .'</td>';
-                echo '<td class="actions">'. $fini .'<a class="edit" href="#" id="'. $ligne->numero .'">Modifier</a><a class="del" href="#" id="'. $ligne->numero .'">Supprimer</a></td>';
+                echo '<td class="actions">'. $fini .'<a class="edit" href="#" data-id="'. $ligne->numero .'">Modifier</a><a class="del" href="#" data-id="'. $ligne->numero .'">Supprimer</a></td>';
             echo '</tr>';
         }
         if( $count=== 0 ){ // Si le résultat de la requête est vide, la valeur FALSE est retournée
@@ -65,7 +65,7 @@ switch ($page){
                 echo '<td>'. $titreClasseur .'</td>';
                 echo '<td>'. $nbRep .'</td>';
                 echo '<td>'. $imageHTML .'</td>';
-                echo '<td class="actions"><a class="edit" href="#" id="'. $numClasseur .'" data-image="'. $image .'">Modifier</a><a href="#" id="'. $numClasseur .'" class="imprint" data-image="'. $image .'">Imprimer</a><a class="del" href="#" id="'. $numClasseur .'" data-image="'. $image .'">Supprimer</a></td>';
+                echo '<td class="actions"><a class="edit" href="#" data-id="'. $numClasseur .'" data-image="'. $image .'">Modifier</a><a href="#" data-id="'. $numClasseur .'" class="imprint" data-image="'. $image .'">Imprimer</a><a class="del" href="#" data-id="'. $numClasseur .'" data-image="'. $image .'">Supprimer</a></td>';
             echo '</tr>';
         }
         if( $count=== 0 ){ // Si le résultat de la requête est vide, la valeur FALSE est retournée
@@ -90,7 +90,7 @@ switch ($page){
             $numero = $ligne->numero;
             echo '<td class="cases">';
                 echo '<span><img src="'. $srcImage .'" alt="'. $ligne->nomImage .'"/></span>';
-                echo '<span><a id="'. $numero .'" href="#" class="del">Supprimer l\'image</a></span>';
+                echo '<span><a data-id="'. $numero .'" href="#" class="del">Supprimer l\'image</a></span>';
             echo '</td>';
             if( $init % 4 == 0 ){
                 echo '</tr>';

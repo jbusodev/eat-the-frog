@@ -5,22 +5,36 @@ $(document).ready(function() {
     if (window.location.href.match('\\index')) {
         checkCredentials();
     }
+    // Triggers login when pressing Enter in pwd field
+    $('#password').keydown(function(event) {
+        if (event.keyCode === 13) {
+            $('#btnLogin').click();
+        }
+    });
 
+    // Triggers login when pressing Enter in user field
+    $('#user').keydown(function(event) {
+        if (event.keyCode === 13) {
+            $('#btnLogin').click();
+        }
+    });
     /* -------------------------- END Login Page Events */
 
 
     /* -------------------------- Tables Events ------------------- */
 
+    /* --------- Tasks Page : Filter ----------------------------- */
 
     let tableCell = document.querySelector('td');
-    if (!$(tableCell).hasClass('empty')) {
-        $('#parent-toggle_finished').show();
-    }
 
-    // Displays finished tasks
+    // Default states - Filters
+    if (!$(tableCell).hasClass('empty')) {
+        $('#parent-toggle_finished').show(); // enables filters if users has tasks
+    }
     $('#hide_ongoing').prop('checked', false); // unchecks hide ingoing
     $('#hide').hide();
 
+    // Toggles finished tasks - Filter Checkbox
     $('#toggle_finished').click(function() {
         if ($(this).is(':checked')) {
             $('.finished').show();
@@ -31,22 +45,11 @@ $(document).ready(function() {
         }
     });
 
-    // Hide ongoing tasks
+    // Hide ongoing tasks - Filter Checkbox
     $('#hide_ongoing').click(function() {
         $('.ongoing').toggle();
     });
-    // triggers login when pressing Enter in pwd field
-    $('#password').keydown(function(event) {
-        if (event.keyCode === 13) {
-            $('#btnLogin').click();
-        }
-    });
-    // Triggers login when pressing Enter in user field
-    $('#user').keydown(function(event) {
-        if (event.keyCode === 13) {
-            $('#btnLogin').click();
-        }
-    });
+
     iconesBoutons();
     /* -------------------------- END Tables Events ------------------- */
 
@@ -58,11 +61,9 @@ $(document).ready(function() {
         setDefaultDatepicker();
     }
 
-
-
     // Mark a task as finished
     $(document).on("click", ".finir", function() {
-        var nItem = $(this).attr('id');
+        var nItem = $(this).attr('data-id');
         setDialog('end', nItem);
     });
 
@@ -73,20 +74,22 @@ $(document).ready(function() {
 
     // Edit a task
     $(document).on("click", ".edit", function() {
-        var nItem = $(this).attr('id');
+        var nItem = $(this).attr('data-id');
         setDialog('edit', nItem);
     });
 
     // Delete a task
     $(document).on("click", ".del", function() {
-        var nItem = $(this).attr('id');
+        var nItem = $(this).attr('data-id');
         setDialog('delete', nItem);
     });
 
     // Print function
     $(document).on("click", ".imprint", function() {
-        var nItem = $(this).attr('id'); // item's ID is set in nItem
+        var nItem = $(this).attr('data-id'); // item's ID is set in nItem
         image = $(this).attr('data-image'); // item's image is set in image
+        console.clear();
+        console.log(image + ' | ' + nItem);
         if (nItem) {
             setDialog('print', nItem);
         } else {
@@ -94,15 +97,15 @@ $(document).ready(function() {
         }
     });
     /**
-     * Titles list refreshed
-     * when directories number changed
-     * in folders.php
+     * Titles list refreshed when number of directories changed
+     * in classeurs.php - dialog
      * */
-    //
     $(document).on("change", "#f_directory", function() {
         var nItem = $('#item').val();
         refreshDialogTitles(nItem);
     });
+
+    // Toggle titles container
     $(document).on("click", "#toggle_titles", function() {
         if (toggled) {
             $('#toggle_titles').text('(Afficher)');
