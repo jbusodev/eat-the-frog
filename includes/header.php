@@ -13,8 +13,8 @@
    $page = $_SESSION['page'];
 
    $menu_arr_extra = array();
-   $mode = '<b>Utilisateur</b>';
-   $messageLogin = '<div style="text-align:right" id="bienvenue"><span style="text-align:right">Vous êtes connecté en tant qu\' $mode</span></div>';
+   $mode = '<b>utilisateur</b>';
+   $messageLogin = '<div style="text-align:right" id="bienvenue"><span style="text-align:right">Vous êtes connecté en tant qu\''. $mode .'</span></div>';
    // Verification of Authenticated user level
       if ( isset($_SESSION['niveau']) ) {
          $niveau = $_SESSION['niveau'];
@@ -32,12 +32,12 @@
                   )
                );
             if($niveau == 1) {
-               $mode = '<b>Super Administrateur</b>';
-               $messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span>Vous êtes connecté en tant que $mode</span></div>";
+               $mode = '<b>super Administrateur</b>';
+               $messageLogin = '<div style="text-align:right" id="bienvenue"><span>Vous êtes connecté en tant que '. $mode.'</span></div>';
             }
             if($niveau == 2){
-               $mode = '<b>Administrateur</b>';
-               $messageLogin = "<div style=\"text-align:right\" id=\"bienvenue\"><span>Vous êtes connecté en tant qu' $mode</span></div>";
+               $mode = '<b>administrateur</b>';
+               $messageLogin = '<div style="text-align:right" id="bienvenue"><span>Vous êtes connecté en tant qu\''. $mode .'</span></div>';
             }
          }
       }
@@ -45,7 +45,6 @@
 
    // Format title - for implementation when internationalization
    $title=ucfirst($page);
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -84,7 +83,9 @@
             </div>
             <nav id="menu">
                <ul class="fleft">
-               <?php include_once('includes/menu.php'); ?>
+               <?php
+                  include_once('includes/menu.php');
+               ?>
                </ul>
                <ul class="fright">
                   <li><a class="liens" href="logout.php">Déconnexion</a></li>

@@ -29,7 +29,7 @@ $(document).ready(function() {
 
     // Default states - Filters
     if (!$(tableCell).hasClass('empty')) {
-        $('#parent-toggle_finished').show(); // enables filters if users has tasks
+        $('#parent-toggle_finished').css("display", "inline-block"); // enables filters if users has tasks
     }
     $('#hide_ongoing').prop('checked', false); // unchecks hide ingoing
     $('#hide').hide();
@@ -38,7 +38,7 @@ $(document).ready(function() {
     $('#toggle_finished').click(function() {
         if ($(this).is(':checked')) {
             $('.finished').show();
-            $('#hide').show();
+            $('#hide').css("display", "inline-block");
         } else {
             $('.finished').hide();
             $('#hide').hide();

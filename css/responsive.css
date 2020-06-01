@@ -197,10 +197,6 @@ input[type="checkbox"]:checked+label:before {
     background-color: var(--contrast-bright);
 }
 
-.hidden {
-    display: none;
-}
-
 .little {
     font-size: 9pt;
     margin: 0;
@@ -491,6 +487,10 @@ svg>path {
 
 .imprint * {
     color: white;
+}
+
+.hidden {
+    display: none;
 }
 
 

@@ -898,6 +898,12 @@ function rafraichirtable() {
             $('#toggle_finished').prop('checked', false);
             $('#hide_ongoing').prop('checked', false);
         });
+    let tableCell = document.querySelector('td');
+
+    // Default states - Filters
+    if (!$(tableCell).hasClass('empty')) {
+        $('#parent-toggle_finished').css("display", "inline-block"); // enables filters if users has tasks
+    }
 }
 
 function rafraichirUsers() {
