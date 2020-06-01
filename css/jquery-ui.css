@@ -1021,7 +1021,7 @@ body .ui-tooltip {
 
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
     border: 1px solid #E8EFF1;
-    background-color: var(--frog-bright);
+    background-color: var(--contrast-bright);
     font-weight: bold;
 }
 
@@ -1576,6 +1576,11 @@ body .ui-tooltip {
 
 .ui-icon-closethick {
     background-position: -96px -128px;
+    background-color: var(--contrast);
+}
+
+.ui-icon-closethick:hover {
+    background-color: var(--red);
 }
 
 .ui-icon-key {

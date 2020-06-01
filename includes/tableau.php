@@ -120,7 +120,7 @@ switch ($page){
                 echo '</td>';
                 echo '<td>';
                     echo '<input type="button" class="bouton btnDisabled save_user hidden" value="Enregistrer" />';
-                    echo '<input type="button" class="bouton btnDisabled del del_user" value="Supprimer" />';
+                    echo '<input type="button" class="bouton btnDisabled del_user" value="Supprimer" />';
                 echo '</td>';
             echo '</tr>';
         echo '</tbody>';

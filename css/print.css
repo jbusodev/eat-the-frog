@@ -136,19 +136,19 @@ section ul {
 }
 
 
-/* PIED de page*/
+/* footer de page*/
 
-#pied_wrapper {
+#footer_wrapper {
     display: none;
 }
 
 
-/* END Pied de page */
+/* END footer de page */
 
 
 /* STYLES POUR IMPRESSION */
 
-#menu_wrapper, #bienvenue, .actions, #add, #pied_wrapper, .dialogs {
+#menu_wrapper, #bienvenue, .actions, #add, #footer_wrapper, .dialogs {
     display: none;
 }
 

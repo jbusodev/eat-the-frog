@@ -29,6 +29,7 @@ $page = $_SESSION['page'];
     </head>
     <body>
         <div id="fond">
+            <div id="overlay"></div>
             <div id="conteneur">
                 <div id="login">
                     <h1>Avalez le crapaud</h1>

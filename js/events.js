@@ -168,7 +168,7 @@ $(document).ready(function() {
 
     // Mobile menu Toggle
     $("#menu_toggle img").click(function() {
-        $("#menu ul").slideToggle();
+        $("#menu").slideToggle();
     });
 
     // Menu toggle
