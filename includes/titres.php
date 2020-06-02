@@ -1,6 +1,6 @@
 <?php
 if(session_id() == "") {
-    require_once('../connexionPDO.php');
+    require_once('../calls/pdo.php');
 }
 $query_titres = "SELECT numero, titre FROM tbl_titres ORDER BY titre";
 $res_t = $connexion->prepare($query_titres);

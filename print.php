@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('connexionPDO.php');
+require_once('calls/pdo.php');
 $nom = $_SESSION['nomUtilisateur'];
 $prenom = $_SESSION['prenomUtilisateur'];
 $nomComplet = $prenom .' '. $nom;

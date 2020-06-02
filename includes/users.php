@@ -4,7 +4,7 @@ if(session_id() == "") {
     $user = $_SESSION['user'];
     $page = $_SESSION['page'];
     $niveau = $_SESSION['niveau'];
-    require_once('../connexionPDO.php');
+    require_once('../calls/pdo.php');
     require_once('../calls/functions.php');
 }
 listeUsers($connexion, $niveau);

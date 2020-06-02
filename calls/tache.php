@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../connexionPDO.php');
+require_once('pdo.php');
 require_once('functions.php');
 
 $user = $_SESSION['user'];
@@ -16,7 +16,7 @@ $dateDTache = $newTache !== '' && isset($newTache['dateD']) && $newTache['dateD'
 $dateFTache = $newTache !== '' && isset($newTache['dateF']) && $newTache['dateF'] !== '' ? $newTache['dateF'] : '';
 $remTache = $newTache !== '' && isset($newTache['remarque'])&& $newTache['remarque'] !== '' ? $newTache['remarque'] : '';
 
-// Conversion et formatage des variables 
+// Conversion et formatage des variables
 $intUser = intval($user);
 $intPrioTache = $prioTache !== '' ? intval($prioTache) :'';
 $intnItem = intval($nItem);
@@ -103,6 +103,6 @@ $reponse = '';
             $reponse = 'ko';
             break;
     }
-    
+
 $arr = array('reponse' => $reponse, 'aujourdhui' => $aujourdhui);
 echo json_encode($arr);

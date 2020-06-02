@@ -1,5 +1,5 @@
 <?php
-require_once('../connexionPDO.php');
+require_once('pdo.php');
 require_once ('../calls/functions.php');
 $output_dir = "../images/classeurs/";
 
@@ -27,4 +27,3 @@ if (file_exists($filePath)) {
 }
 $arr = array('reponse' => $reponse);
 echo json_encode($arr);
-    

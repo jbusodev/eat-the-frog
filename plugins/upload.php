@@ -1,9 +1,9 @@
 <?php
 if(session_id() == ""){
     session_start();
-    require_once('../connexionPDO.php');
+    require_once('../calls/pdo.php');
     require_once('../calls/functions.php');
-    
+
     $user = $_SESSION['user'];
     $pseudo = isset( $_SESSION['pseudo']) ? $_SESSION['pseudo'] : '';
 }
@@ -13,9 +13,9 @@ $strAujourdhui = fileName($aujourdhui);
 $intnImage = null;
 if( isset($_FILES["myfile"]) ) {
     $arr = array();
-    
+
     $error =$_FILES["myfile"]["error"];
-    
+
     if( !is_array($_FILES["myfile"]["name"]) ) {
         $selectedFileName = $_FILES["myfile"]["name"];
         if( !existeImage($connexion, $selectedFileName) ){
@@ -32,7 +32,7 @@ if( isset($_FILES["myfile"]) ) {
                     break;
             }
             $fileName = $pseudo .'_'. $strAujourdhui . $extension;
-            /* Si l'image n'existe pas sur le serveur, elle est uploadée 
+            /* Si l'image n'existe pas sur le serveur, elle est uploadée
              * sur le serveur */
             move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
             $query_last = "SELECT * FROM tbl_images WHERE numero = (SELECT MAX(numero) from tbl_images)";

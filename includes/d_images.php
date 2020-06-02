@@ -8,7 +8,7 @@ if(session_id() == "") {
     session_start();
     $user = $_SESSION['user'];
     $page = $_SESSION['page'];
-    require_once('../connexionPDO.php');
+    require_once('../calls/pdo.php');
     require_once('../calls/functions.php');
     $nbRepertoire = isset( $_POST['nbRep'] ) ? $_POST['nbRep'] : '';
     $nItem = isset( $_POST['nItem'] ) ? $_POST['nItem'] : '';

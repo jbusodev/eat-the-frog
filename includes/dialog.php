@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../connexionPDO.php');
+require_once('../calls/pdo.php');
 require_once('../calls/functions.php');
 
 // Variables générales

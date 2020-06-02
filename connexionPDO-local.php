@@ -1,6 +1,6 @@
 <?php
 //PDO Connection file - EDIT PARAMATERS BELOW IF YOU ARE HOSTING ON YOUR LOCAL MACHINE
-	$PARAM_hote='postgres://nxmrnloptcddpn:42703db7b2bb298ddfd2f2555af5d9ee4f3223da540acbf4db5fe26da96d0b91@ec2-54-246-87-132.eu-west-1.compute.amazonaws.com:5432/d7ggb86d69c7un';
+	$PARAM_hote='localhost';
 	$PARAM_nom_bd='crapaud';
 	$PARAM_utilisateur='root';
 	$PARAM_mot_passe=''; // ENTER YOUR PASSWORD HERE

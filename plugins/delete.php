@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../connexionPDO.php');
+require_once('../calls/pdo.php');
 require_once ('../calls/functions.php');
 $output_dir = "../images/classeurs/";
 if(isset($_POST["op"]) && $_POST["op"] == "delete" && isset($_POST['name']))

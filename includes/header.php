@@ -1,7 +1,7 @@
 <?php
    session_start();
    require_once ('calls/functions.php');
-   require_once('./connexionPDO.php');
+   require_once('./calls/pdo.php');
    $nom = isset( $_SESSION['nomUtilisateur'] ) ? $_SESSION['nomUtilisateur'] : '';
    $prenom = isset( $_SESSION['prenomUtilisateur'] ) ? $_SESSION['prenomUtilisateur'] : 'invite';
    $user = isset( $_SESSION['user'] ) ? $_SESSION['user'] : header('Location: index.php');
