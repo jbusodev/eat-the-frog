@@ -1,5 +1,5 @@
 <?php
-php_info();
+phpinfo();
 
 session_start();
 require_once('calls/pdo.php');
