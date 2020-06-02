@@ -1,4 +1,4 @@
 <?php
-$PDO_file = '../connexionPDO.php';
-require_once($PDO_file);
+$PDO_file = '/../connexionPDO-local.php';
+require_once(__DIR__.$PDO_file);
 ?>
