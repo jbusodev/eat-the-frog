@@ -49,7 +49,7 @@ $page = $_SESSION['page'];
                     </div>
                 </div>
             </div>
-            <footer class="footer">Copyright 2020. Jonathan Buso</footer>
+            <footer class="footer">Copyright 2020. <a href="https://jbusodev.github.io">Jonathan Buso</a></footer>
         </div>
     </body>
 </html>
