@@ -4,17 +4,6 @@ require_once('calls/pdo.php');
 $url = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, "utf-8");
 $_SESSION['page'] = 'login';
 $page = $_SESSION['page'];
-
-$notifier = new Airbrake\Notifier(array(
-    'projectId' => 275568,
-    'projectKey' => '9dc8d03a67afadb8a8a97219bbff5c89'
-));
-
-Airbrake\Instance::set($notifier);
-
-
-$handler = new Airbrake\ErrorHandler($notifier);
-$handler->register();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
