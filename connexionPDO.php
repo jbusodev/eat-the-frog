@@ -12,6 +12,16 @@
 
 	try{
 		$connexion = new PDO(
+			'mysql://b4f8r56806xqe4h9:ghhtk018gt24b6i4@q7cxv1zwcdlw7699.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/tndjl5p9q5z0x107'
+		);
+	}
+	catch(Exception $e){
+		echo 'Connection failed : '.$e->getMessage().'<br />';
+		echo 'N° : '.$e->getCode();
+	}
+	/*
+	try{
+		$connexion = new PDO(
 			'mysql:host='.$host.';dbname='.$database, $dbuser, $dbpassword, $PARAM_options
 		);
 	}
@@ -19,4 +29,5 @@
 		echo 'Connection failed : '.$e->getMessage().'<br />';
 		echo 'N° : '.$e->getCode();
 	}
+	*/
 ?>
