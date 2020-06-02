@@ -1,9 +1,10 @@
 <?php
-//PDO Connection file - EDIT PARAMATERS BELOW IF YOU ARE HOSTING ON YOUR LOCAL MACHINE
-	$host='q7cxv1zwcdlw7699.chr7pe7iynqr.eu-west-1.rds.amazonaws.com';
-	$dbuser='b4f8r56806xqe4h9';
-	$dbpassword='ghhtk018gt24b6i4'; // ENTER YOUR PASSWORD HERE
-	$database='tndjl5p9q5z0x107';
+//PDO Connection file
+// mysql://b5bcc1e7cbeba6:64b1232c@eu-cdbr-west-03.cleardb.net/heroku_db94a9d4da5b206?reconnect=true
+	$host='eu-cdbr-west-03.cleardb.net';
+	$dbuser='b5bcc1e7cbeba6';
+	$dbpassword='64b1232c'; // ENTER YOUR PASSWORD HERE
+	$database='heroku_db94a9d4da5b206';
 	//Options
 	$PARAM_options = array (
 		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
