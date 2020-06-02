@@ -1,4 +1,6 @@
 <?php
+php_info();
+
 session_start();
 require_once('calls/pdo.php');
 $url = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, "utf-8");
