@@ -2,9 +2,8 @@
 $(document).ready(function() {
     /* ------------------------ Login Page Events ------------------------ */
     // Credentials Check
-    if (window.location.href.match('\\index')) {
-        checkCredentials();
-    }
+    checkCredentials();
+
     // Triggers login when pressing Enter in pwd field
     $('#password').keydown(function(event) {
         if (event.keyCode === 13) {
