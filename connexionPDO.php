@@ -1,9 +1,9 @@
 <?php
 //PDO Connection file - EDIT PARAMATERS BELOW IF YOU ARE HOSTING ON YOUR LOCAL MACHINE
-	$PARAM_hote='ec2-54-246-87-132.eu-west-1.compute.amazonaws.com';
-	$PARAM_nom_bd='d7ggb86d69c7un';
-	$PARAM_utilisateur='nxmrnloptcddpn';
-	$PARAM_mot_passe='42703db7b2bb298ddfd2f2555af5d9ee4f3223da540acbf4db5fe26da96d0b91'; // ENTER YOUR PASSWORD HERE
+	$host='q7cxv1zwcdlw7699.chr7pe7iynqr.eu-west-1.rds.amazonaws.com';
+	$database='tndjl5p9q5z0x107';
+	$dbuser='b4f8r56806xqe4h9';
+	$dbpassword='ghhtk018gt24b6i4'; // ENTER YOUR PASSWORD HERE
 	//Options
 	$PARAM_options = array (
 		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
@@ -12,7 +12,7 @@
 
 	try{
 		$connexion = new PDO(
-			'mysql:host='.$PARAM_hote.';dbname='.$PARAM_nom_bd, $PARAM_utilisateur, $PARAM_mot_passe, $PARAM_options
+			'mysql:host='.$host.';dbname='.$database, $dbuser, $dbpassword, $PARAM_options
 		);
 	}
 	catch(Exception $e){
