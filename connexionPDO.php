@@ -14,15 +14,14 @@
 
 	try{
 		// PDO Connection
-		//	$connexion = new PDO("mysql:host=$host;dbname=$database", $dbuser, $dbpassword);
+		$connexion = new PDO("mysql:host=$host;dbname=$database", $dbuser, $dbpassword);
 		// Error mode
-		// $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$connexion = new mysqli($host, $dbuser, $dbpassword, $database, $port);
+		// $connexion = new mysqli($host, $dbuser, $dbpassword, $database, $port);
 
 	}
 	catch(Exception $e){
-		echo 'Connection failed : '.$e->getMessage().'<br />';
-		echo 'N° : '.$e->getCode();
+		echo 'Connection failed : '.$e->getMessage();
 	}
 ?>
