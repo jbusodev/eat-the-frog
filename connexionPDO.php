@@ -7,14 +7,15 @@
 	$database='heroku_db94a9d4da5b206';
 	$port="3306";
 	//Options
-	$PARAM_options = array (
+	$options = array (
 		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+		PDO::MYSQL_ATTR_SSL_CAPATH => '.ssl',
+		PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => 'false'
 	);
 
 	try{
 		// PDO Connection
-		$connexion = new PDO("mysql:host=$host;dbname=$database", $dbuser, $dbpassword);
+		$connexion = new PDO("mysql:host=$host;dbname=$database", $dbuser, $dbpassword, $options);
 		// Error mode
 		$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
