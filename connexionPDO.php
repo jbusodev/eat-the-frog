@@ -14,6 +14,7 @@
 		$connexion = new PDO(
 			"mysql:host=$host;dbname=$database", $dbuser, $dbpassword
 		);
+		$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	catch(Exception $e){
 		echo 'Connection failed : '.$e->getMessage().'<br />';
