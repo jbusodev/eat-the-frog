@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^taches/(\d+)*$ ./taches.php?id=$1
+RewriteRule ^classeurs/(\d+)*$ ./classeurs.php?id=$1
+RewriteRule ^titres/(\d+)*$ ./titres.php?id=$1
+RewriteRule ^images/(\d+)*$ ./images.php?id=$1
+RewriteRule ^users/(\d+)*$ ./users.php?id=$1
+
+</IfModule>
