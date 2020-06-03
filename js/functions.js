@@ -844,7 +844,7 @@ function setDialog(action, nItem) {
 
             // hides image controls if no image - folder edit
             $('.dialog').ready(function() {
-                if (document.getElementById('isImage').checked) {
+                if ($('#isImage').checked) {
                     $("#image").val('NULL');
                     $(".noImage").toggle();
                     $("#boxUpload").toggle();
