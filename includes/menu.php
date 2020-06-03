@@ -25,7 +25,7 @@ foreach($menu_merged as $item) {
    $value = ucfirst($item["value"]); // Capitalize the string
    $pageString = pathinfo($href, PATHINFO_FILENAME); // Strips extension off a string to return filename
    $isActive = $page == $pageString ? ' active' : '';
-   echo '<li><a class="liens'. $isActive .'" data-menu"'. $data .'" href="'. $href .'">'. $value .'</a></li>';
+   echo '<li><a data-page="'. $page .'" class="liens'. $isActive .'" data-menu"'. $data .'" href="'. $href .'">'. $value .'</a></li>';
 }
 
 ?>
