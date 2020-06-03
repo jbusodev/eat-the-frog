@@ -51,5 +51,3 @@ $page = $_SESSION['page'];
             </div>
             <footer class="footer">Copyright 2020. <a href="https://jbusodev.github.io">Jonathan Buso</a></footer>
         </div>
-    </body>
-</html>

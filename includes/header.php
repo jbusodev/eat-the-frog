@@ -55,30 +55,8 @@
       <link rel="stylesheet" type="text/css" media="all" href="./css/responsive.css" />
       <link rel="stylesheet" type="text/css" media="all" href="./css/polices/polices.css" />
       <link rel="icon" href="images/favicon.ico" />
-
-      <!-- jQuery -->
-      <!--
-      <script type="text/javascript" src="./js/lib/jquery-2.1.1.min.js"></script>
-      -->
-      <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-      <!-- jQuery UI -->
-      <script type="text/javascript" src="./js/lib/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="./js/functions.js"></script>
-      <script type="text/javascript" src="./js/events.js"></script>
-
-
       <link rel="stylesheet" type="text/css" media="all" href="./css/jquery-ui.css" />
-
-      <!---------------------------- Plugins --------------------- -->
-         <!-- Plugin JS jQuery-Upload-File permettant l'upload d'image
-               trouvé sur http://hayageek.com/docs/jquery-upload-file.php -->
-         <script src="./js/plugins/jquery.uploadfile.js"></script>
-         <link rel="stylesheet" type="text/css" media="all" href="./css/uploadfile.css" />
-
-         <!-- Plugin JS jQuery.print permettant d'imprimer une partie de page
-               trouvé sur https://github.com/DoersGuild/jQuery.print -->
-         <script src="./js/plugins/jQuery.print.js"></script>
-      <!---------------------------- END Plugins --------------------- -->
+      <link rel="stylesheet" type="text/css" media="all" href="./css/uploadfile.css" />
    </head>
    <body>
         <div class="print"><span>Application WEB : Avalez le crapaud</span><span>Utilisateur : <?php echo $prenom .' '. $nom; ?></span></div>
