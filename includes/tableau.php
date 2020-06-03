@@ -15,6 +15,7 @@ if( isset($_POST['page']) ){
 }
 $aujourdhui = date('Y-m-d');
 $chemin = 'images/classeurs/';
+$ongoingCount = 0;
 
 switch ($page){
     case 'taches':
@@ -29,7 +30,12 @@ switch ($page){
         while( $ligne = $results->fetch(PDO::FETCH_OBJ) ){
             $dfin = $ligne->dateFin;
             $remarque = $ligne->remarque !== '' ? ' title="'. $ligne->remarque .'"' : '';
-            $terminee = $dfin !== '0000-00-00' && $dfin <= $aujourdhui ? ' class="finished hidden"' : ' class="ongoing"';
+            if ($dfin !== '0000-00-00' && $dfin <= $aujourdhui) {
+                $terminee = ' class="finished hidden"';
+            } else {
+                $terminee = ' class="ongoing"';
+                $ongoingCount++;
+            }
             $fini = $ligne->dateFin == '0000-00-00' ? '<a class="finir" href="#" data-id="'. $ligne->numero .'">Terminer</a>': '';
             echo '<tr'. $terminee .'>';
                 echo '<td>'. $ligne->priorite .'</td>';
@@ -39,9 +45,16 @@ switch ($page){
                 echo '<td class="actions">'. $fini .'<a class="edit" href="#" data-id="'. $ligne->numero .'">Modifier</a><a class="del" href="#" data-id="'. $ligne->numero .'">Supprimer</a></td>';
             echo '</tr>';
         }
-        if( $count=== 0 ){ // Si le résultat de la requête est vide, la valeur FALSE est retournée
+        // 0 Tasks for a user
+        if( $count=== 0 && $ongoingCount === 0){
             echo '<tr>';
                 echo '<td colspan=5 class="empty">Aucune tâche pour l\'instant.</td>';
+            echo '</tr>';
+        }
+        // 0 ongoing tasks
+        else {
+            echo '<tr class="no-ongoing">';
+                echo '<td colspan=5 class="">Aucune tâche en cours. Utilisez le filtre pour afficher les tâches terminées.</td>';
             echo '</tr>';
         }
         $results->closeCursor();

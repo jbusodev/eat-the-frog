@@ -36,11 +36,13 @@ $(document).ready(function() {
     // Toggles finished tasks - Filter Checkbox
     $('#toggle_finished').click(function() {
         if ($(this).is(':checked')) {
-            $('.finished').show();
-            $('#hide').css("display", "inline-block");
+            $('.finished').show(); // show finished tasks
+            $('#hide').css("display", "inline-block"); // shows second filter
+            $('.no-ongoing').hide(); // hides 0 ongoing notice
         } else {
-            $('.finished').hide();
-            $('#hide').hide();
+            $('.finished').hide(); // hides finished tasks
+            $('#hide').hide(); // hides second filter
+            $('.no-ongoing').show(); // shows 0 ongoing notice
         }
     });
 
