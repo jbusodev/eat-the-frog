@@ -18,17 +18,19 @@ if ( isset($_SESSION['user']) ) {
 			</ul>
 			-->
 			<ul class="little inline-block">
-                            <li><span class="little">© Copyright 2020. Tous droits réservés. <i>Application développée par <a href="https://jbusodev.github.io">Jonathan Buso</a></i></span></li>
+                <li><span class="little">© Copyright 2020. Tous droits réservés. <i>Application développée par <a href="https://jbusodev.github.io">Jonathan Buso</a></i></span></li>
 			</ul>
 		</div>
 	</div>
 </div>
 
       <!-- jQuery -->
-      <!--
+
       <script type="text/javascript" src="./js/lib/jquery-2.1.1.min.js"></script>
-      -->
+
+      <!--
       <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+      -->
       <!-- jQuery UI -->
       <script type="text/javascript" src="./js/lib/jquery-ui.min.js"></script>
       <script type="text/javascript" src="./js/functions.js"></script>

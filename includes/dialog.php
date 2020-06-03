@@ -149,9 +149,11 @@ if( isset($_POST['action']) ){
                 echo '<div class="dialogs" id="dialog" title="'. $title .'">';
                 /*
                 if( $action !== 'add'){
+                    */
                     echo '<pre>';
                         var_dump($obj_classeur);
                     echo '</pre>';
+                    /*
                 }
                 */
                     echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
