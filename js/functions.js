@@ -843,16 +843,16 @@ function setDialog(action, nItem) {
             $("#hidden_images").hide();
 
             // hides image controls if no image - folder edit
-            if (document.getElementById('isImage').checked) {
-                $("#image").val('NULL');
-                $(".noImage").toggle();
-                $("#boxUpload").toggle();
-                $("#hidden_images").hide();
-            } else {
-                $("#image").val('');
-            }
-
-
+            $('.dialog').ready(function() {
+                if (document.getElementById('isImage').checked) {
+                    $("#image").val('NULL');
+                    $(".noImage").toggle();
+                    $("#boxUpload").toggle();
+                    $("#hidden_images").hide();
+                } else {
+                    $("#image").val('');
+                }
+            });
             $("#isImage").click(function() {
                 if (document.getElementById('isImage').checked) {
                     $("#image").val('NULL');
