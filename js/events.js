@@ -68,6 +68,7 @@ $(document).ready(function() {
 
     // Add a task
     $(document).on("click", ".add", function() {
+        alert('TEST');
         setDialog('add');
     });
 

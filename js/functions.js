@@ -7,12 +7,17 @@ function checkCredentials() {
     // error message
     let errormessage = document.getElementsByClassName('error');
 
-    username.focus();
+    if (username !== null) {
+        username.focus();
+    }
+
 
     // Authentication check
     $('#btnLogin').click(function() {
-        user = $(username).val();
-        pwd = $(password).val();
+        if (username !== null && password !== null) {
+            user = $(username).val();
+            pwd = $(password).val();
+        }
 
         $.ajax({
             type: 'POST',
