@@ -293,11 +293,12 @@ function fileName(&$Str){
 }
 /* ------------ END Fonctions relatives au traitement des images --------*/
 
+// This function need to be modified if the application structure changes
 function getCurrentPage(&$Str) {
     $pattern_ext = '/\.php|\.html+[a-zA-Z?=]*/';
     $pattern_start = '/(\/)?/';
     $Str = preg_replace($pattern_ext, "", $Str); // trims extension + args
-    $Str = trim($pattern_start, "\/", $Str); // trim folder
+    $Str = trim($Str, $pattern_start); // trim folder
     return $Str;
 }
 
