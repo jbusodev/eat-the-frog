@@ -295,9 +295,9 @@ function fileName(&$Str){
 
 function getCurrentPage(&$Str) {
     $pattern_ext = '/\.php|\.html+[a-zA-Z?=]*/';
-    $pattern_start = '/(localhost)?(\/)?(\w)+(\/)/';
+    // $pattern_start = '/(localhost)?(\/)?(\w)+(\/)/';
     $Str = preg_replace($pattern_ext, "", $Str); // trims extension + args
-    $Str = preg_replace($pattern_start, "", $Str); // trim folder
+    // $Str = preg_replace($pattern_start, "", $Str); // trim folder
     return $Str;
 }
 
