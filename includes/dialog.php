@@ -133,7 +133,7 @@ if( isset($_POST['action']) ){
                     $delete = 'Êtes-vous sûr de vouloir supprimer ce classeur ?';
                     break;
                 case 'print':
-                    $title = 'Imprimer un classeur';
+                    $title = 'Aperçu avant impression';
                     $query_edit = "SELECT * FROM tbl_classeurs WHERE num_tbl_users=$user $andt $nItem";
                     $res_edit = $connexion->prepare($query_edit);
                     $res_edit->execute();
