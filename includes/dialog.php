@@ -149,11 +149,9 @@ if( isset($_POST['action']) ){
                 echo '<div class="dialogs" id="dialog" title="'. $title .'">';
                 /*
                 if( $action !== 'add'){
-                    */
                     echo '<pre>';
                         var_dump($obj_classeur);
                     echo '</pre>';
-                    /*
                 }
                 */
                     echo '<div class="champs"><div id="message">'. $delete .'</div></div>';
@@ -168,9 +166,9 @@ if( isset($_POST['action']) ){
                     echo '<div class="champs c_caches">';
                         echo '<label>Titres du répertoire</label><a href="#" id="toggle_titles">(Afficher)</a>';
                     echo '</div>';
-                    if ( $action == 'delete' ){
+                    if ( $action !== 'delete' ){
                     echo '<div class="champs" id="hidden_titles">';
-                        include_once('../includes/d_titres.php');
+                        include_once('d_titres.php');
                     echo '</div>';
                     }
                     echo '<a href="titres.php" style="font-size:10pt;border:none" class="extlink c_caches" title="Vous serez redirigé vers la page gestion des titres">Ajouter des titres</a>';
