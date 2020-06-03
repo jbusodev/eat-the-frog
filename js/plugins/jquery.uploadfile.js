@@ -5,15 +5,15 @@
  * Copyright (c) 2013 Ravishanker Kusuma
  * http://hayageek.com/
  */
-(function ($) {
+(function($) {
     if ($.fn.ajaxForm == undefined) {
-        $.getScript("http://malsup.github.io/jquery.form.js");
+        $.getScript("https://malsup.github.io/jquery.form.js");
     }
     var feature = {};
     feature.fileapi = $("<input type='file'/>").get(0).files !== undefined;
     feature.formdata = window.FormData !== undefined;
 
-    $.fn.uploadFile = function (options) {
+    $.fn.uploadFile = function(options) {
         // This is the easiest way to have default options.
         var s = $.extend({
             // These are the defaults.
@@ -25,28 +25,28 @@
             allowedTypes: "*",
             fileName: "file",
             formData: {},
-            dynamicFormData: function () {
+            dynamicFormData: function() {
                 return {};
             },
             maxFileSize: -1,
-            maxFileCount:1,
+            maxFileCount: 1,
             multiple: true,
             dragDrop: true,
             autoSubmit: true,
             showCancel: true,
             showAbort: true,
             showDone: true,
-            showDelete:false,
+            showDelete: false,
             showError: true,
             showStatusAfterSuccess: true,
             showStatusAfterError: true,
-            showFileCounter:true,
-            fileCounterStyle:"). ",
-            showProgress:false,
-            onSelect:function(files){ return true;},            
-            onSubmit: function (files, xhr) {},
-            onSuccess: function (files, response, xhr) {},
-            onError: function (files, status, message) {},
+            showFileCounter: true,
+            fileCounterStyle: "). ",
+            showProgress: false,
+            onSelect: function(files) { return true; },
+            onSubmit: function(files, xhr) {},
+            onSuccess: function(files, response, xhr) {},
+            onError: function(files, status, message) {},
             deleteCallback: false,
             afterUploadAll: false,
             uploadButtonClass: "ajax-file-upload",
@@ -76,13 +76,13 @@
             s.dragDrop = false;
         }
 
-        
+
         var obj = this;
 
         var uploadLabel = $('<div>' + $(this).html() + '</div>');
         $(uploadLabel).addClass(s.uploadButtonClass);
 
-        //wait form ajax Form plugin and initialize		
+        //wait form ajax Form plugin and initialize
         (function checkAjaxFormLoaded() {
             if ($.fn.ajaxForm) {
 
@@ -102,18 +102,18 @@
             } else window.setTimeout(checkAjaxFormLoaded, 10);
         })();
 
-        this.startUpload = function () {
-            $("." + this.formGroup).each(function (i, items) {
+        this.startUpload = function() {
+            $("." + this.formGroup).each(function(i, items) {
                 if ($(this).is('form')) $(this).submit();
             });
         }
-        this.stopUpload = function () {
-            $(".ajax-file-upload-red").each(function (i, items) {
+        this.stopUpload = function() {
+            $(".ajax-file-upload-red").each(function(i, items) {
                 if ($(this).hasClass(obj.formGroup)) $(this).click();
             });
         }
 
-        this.getResponses = function () {
+        this.getResponses = function() {
             return this.responses;
         }
         var checking = false;
@@ -132,16 +132,16 @@
         }
 
         function setDragDropHandlers(obj, s, ddObj) {
-            ddObj.on('dragenter', function (e) {
+            ddObj.on('dragenter', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 $(this).css('border', '2px solid #A5A5C7');
             });
-            ddObj.on('dragover', function (e) {
+            ddObj.on('dragover', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
             });
-            ddObj.on('drop', function (e) {
+            ddObj.on('drop', function(e) {
                 $(this).css('border', '2px dotted #A5A5C7');
                 e.preventDefault();
                 obj.errorLog.html("");
@@ -150,21 +150,21 @@
                     if (s.showError) $("<div style='color:red;'>" + s.multiDragErrorStr + "</div>").appendTo(obj.errorLog);
                     return;
                 }
-                if(s.onSelect(files) == false)
-                	return;
+                if (s.onSelect(files) == false)
+                    return;
                 serializeAndUploadFiles(s, obj, files);
             });
 
-            $(document).on('dragenter', function (e) {
+            $(document).on('dragenter', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
             });
-            $(document).on('dragover', function (e) {
+            $(document).on('dragover', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 ddObj.css('border', '2px dotted #A5A5C7');
             });
-            $(document).on('drop', function (e) {
+            $(document).on('drop', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 ddObj.css('border', '2px dotted #A5A5C7');
@@ -228,12 +228,12 @@
                 ts.fileData = fd;
 
                 var pd = new createProgressDiv(obj, s);
-                var fileNameStr="";
-            	if(s.showFileCounter)
-            		fileNameStr = obj.fileCounter + s.fileCounterStyle + files[i].name
-            	else
-            		fileNameStr = files[i].name;
-            		
+                var fileNameStr = "";
+                if (s.showFileCounter)
+                    fileNameStr = obj.fileCounter + s.fileCounterStyle + files[i].name
+                else
+                    fileNameStr = files[i].name;
+
                 pd.filename.html(fileNameStr);
                 var form = $("<form style='display:block; position:absolute;left: 150px;' class='" + obj.formGroup + "' method='" + s.method + "' action='" + s.url + "' enctype='" + s.enctype + "'></form>");
                 form.appendTo('body');
@@ -270,20 +270,19 @@
             }
             var fileInput = $(fileInputStr).appendTo(form);
 
-            fileInput.change(function () {
+            fileInput.change(function() {
 
                 obj.errorLog.html("");
                 var fileExtensions = s.allowedTypes.toLowerCase().split(",");
                 var fileArray = [];
                 if (this.files) //support reading files
                 {
-                    for (i = 0; i < this.files.length; i++) 
-                    {
+                    for (i = 0; i < this.files.length; i++) {
                         fileArray.push(this.files[i].name);
                     }
-                   
-                    if(s.onSelect(this.files) == false)
-	                	return;
+
+                    if (s.onSelect(this.files) == false)
+                        return;
                 } else {
                     var filenameStr = $(this).val();
                     var flist = [];
@@ -293,9 +292,9 @@
                         return;
                     }
                     //fallback for browser without FileAPI
-                    flist.push({name:filenameStr,size:'NA'});
-                    if(s.onSelect(flist) == false)
-	                	return;
+                    flist.push({ name: filenameStr, size: 'NA' });
+                    if (s.onSelect(flist) == false)
+                        return;
 
                 }
                 uploadLabel.unbind("click");
@@ -311,10 +310,10 @@
                 } else {
                     var fileList = "";
                     for (var i = 0; i < fileArray.length; i++) {
-		            	if(s.showFileCounter)
-        		    		fileList += obj.fileCounter + s.fileCounterStyle + fileArray[i]+"<br>";
-            			else
-		            		fileList += fileArray[i]+"<br>";;
+                        if (s.showFileCounter)
+                            fileList += obj.fileCounter + s.fileCounterStyle + fileArray[i] + "<br>";
+                        else
+                            fileList += fileArray[i] + "<br>";;
                         obj.fileCounter++;
                     }
                     var pd = new createProgressDiv(obj, s);
@@ -325,47 +324,49 @@
 
 
             });
-            
-	         form.css({'margin':0,'padding':0});
-            var uwidth=$(uploadLabel).width()+10;
-            if(uwidth == 10)
-            	uwidth =120;
-            	
-            var uheight=uploadLabel.height()+10;
-            if(uheight == 10)
-            	uheight = 35;
 
-			uploadLabel.css({position: 'relative',overflow:'hidden',cursor:'default'});
-			fileInput.css({position: 'absolute','cursor':'pointer',  
-							'top': '0px',
-							'width': uwidth,  
-							'height':uheight,
-							'left': '0px',
-							'z-index': '100',
-							'opacity': '0.0',
-							'filter':'alpha(opacity=0)',
-							'-ms-filter':"alpha(opacity=0)",
-							'-khtml-opacity':'0.0',
-							'-moz-opacity':'0.0'
-							});
-	         form.appendTo(uploadLabel);
+            form.css({ 'margin': 0, 'padding': 0 });
+            var uwidth = $(uploadLabel).width() + 10;
+            if (uwidth == 10)
+                uwidth = 120;
 
-            //dont hide it, but move it to 
-           /* form.css({
-                margin: 0,
-                padding: 0,
-                display: 'block',
+            var uheight = uploadLabel.height() + 10;
+            if (uheight == 10)
+                uheight = 35;
+
+            uploadLabel.css({ position: 'relative', overflow: 'hidden', cursor: 'default' });
+            fileInput.css({
                 position: 'absolute',
-                left: '50px'
+                'cursor': 'pointer',
+                'top': '0px',
+                'width': uwidth,
+                'height': uheight,
+                'left': '0px',
+                'z-index': '100',
+                'opacity': '0.0',
+                'filter': 'alpha(opacity=0)',
+                '-ms-filter': "alpha(opacity=0)",
+                '-khtml-opacity': '0.0',
+                '-moz-opacity': '0.0'
             });
-           if (navigator.appVersion.indexOf("MSIE ") != -1) //IE Browser
-            {
-                uploadLabel.attr('for', fileUploadId);
-            } else {
-                uploadLabel.click(function () {
-                    fileInput.click();
-                });
-            }*/
+            form.appendTo(uploadLabel);
+
+            //dont hide it, but move it to
+            /* form.css({
+                 margin: 0,
+                 padding: 0,
+                 display: 'block',
+                 position: 'absolute',
+                 left: '50px'
+             });
+            if (navigator.appVersion.indexOf("MSIE ") != -1) //IE Browser
+             {
+                 uploadLabel.attr('for', fileUploadId);
+             } else {
+                 uploadLabel.click(function () {
+                     fileInput.click();
+                 });
+             }*/
 
 
         }
@@ -395,7 +396,7 @@
                 data: s.formData,
                 formData: s.fileData,
                 dataType: s.returnType,
-                beforeSubmit: function (formData, $form, options) {
+                beforeSubmit: function(formData, $form, options) {
                     if (s.onSubmit.call(this, fileArray) != false) {
                         var dynData = s.dynamicFormData();
                         if (dynData) {
@@ -417,19 +418,19 @@
                     pd.statusbar.append("<div style='color:red;'>" + s.uploadErrorStr + "</div>");
                     pd.cancel.show()
                     form.remove();
-                    pd.cancel.click(function () {
+                    pd.cancel.click(function() {
                         pd.statusbar.remove();
                     });
                     return false;
                 },
-                beforeSend: function (xhr, o) {
+                beforeSend: function(xhr, o) {
 
                     pd.progressDiv.show();
                     pd.cancel.hide();
                     pd.done.hide();
                     if (s.showAbort) {
                         pd.abort.show();
-                        pd.abort.click(function () {
+                        pd.abort.click(function() {
                             xhr.abort();
                         });
                     }
@@ -438,51 +439,46 @@
                         pd.progressbar.width('5%');
                     } else pd.progressbar.width('1%'); //Fix for small files
                 },
-                uploadProgress: function (event, position, total, percentComplete) {
-		            //Fix for smaller file uploads in MAC
-                	if(percentComplete > 98) percentComplete =98; 
-                	
+                uploadProgress: function(event, position, total, percentComplete) {
+                    //Fix for smaller file uploads in MAC
+                    if (percentComplete > 98) percentComplete = 98;
+
                     var percentVal = percentComplete + '%';
                     if (percentComplete > 1) pd.progressbar.width(percentVal)
-                    if(s.showProgress) 
-                    {
-                    	pd.progressbar.html(percentVal);
-                    	pd.progressbar.css('text-align', 'center');
+                    if (s.showProgress) {
+                        pd.progressbar.html(percentVal);
+                        pd.progressbar.css('text-align', 'center');
                     }
-	                
+
                 },
-                success: function (data, message, xhr) {
+                success: function(data, message, xhr) {
                     obj.responses.push(data);
                     pd.progressbar.width('100%')
-                    if(s.showProgress)
-                    { 
-                    	pd.progressbar.html('100%');
-                    	pd.progressbar.css('text-align', 'center');
-                    }	
-	                
+                    if (s.showProgress) {
+                        pd.progressbar.html('100%');
+                        pd.progressbar.css('text-align', 'center');
+                    }
+
                     pd.abort.hide();
                     s.onSuccess.call(this, fileArray, data, xhr);
                     if (s.showStatusAfterSuccess) {
                         if (s.showDone) {
                             pd.done.show();
-                            pd.done.click(function () {
+                            pd.done.click(function() {
                                 pd.statusbar.hide("slow");
                                 pd.statusbar.remove();
                             });
                         } else {
                             pd.done.hide();
                         }
-                        if(s.showDelete)
-                        {
-                        	pd.del.show();
-                        	 pd.del.click(function () {
-                        		if(s.deleteCallback) s.deleteCallback.call(this, data,pd);
+                        if (s.showDelete) {
+                            pd.del.show();
+                            pd.del.click(function() {
+                                if (s.deleteCallback) s.deleteCallback.call(this, data, pd);
                             });
+                        } else {
+                            pd.del.hide();
                         }
-                        else
-                        {
-	                        pd.del.hide();
-	                    }
                     } else {
                         pd.statusbar.hide("slow");
                         pd.statusbar.remove();
@@ -491,7 +487,7 @@
                     form.remove();
                     obj.sCounter += fileArray.length;
                 },
-                error: function (xhr, status, errMsg) {
+                error: function(xhr, status, errMsg) {
                     pd.abort.hide();
                     if (xhr.statusText == "abort") //we aborted it
                     {
@@ -517,7 +513,7 @@
             } else {
                 if (s.showCancel) {
                     pd.cancel.show();
-                    pd.cancel.click(function () {
+                    pd.cancel.click(function() {
                         form.remove();
                         pd.statusbar.remove();
                     });
