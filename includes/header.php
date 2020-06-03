@@ -52,10 +52,9 @@
       <meta name="viewport" content="width=device-width, user-scalable=no">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Avalez le crapaud - <?php echo $title; ?></title>
-      <link rel="stylesheet" type="text/css" media="all" href="./css/responsive.css" />
-      <link rel="stylesheet" type="text/css" media="all" href="./css/polices/polices.css" />
-      <link rel="icon" href="images/favicon.ico" />
       <link rel="stylesheet" type="text/css" media="all" href="./css/jquery-ui.css" />
+      <link rel="stylesheet" type="text/css" media="all" href="./css/responsive.css" />
+      <link rel="icon" href="images/favicon.ico" />
       <link rel="stylesheet" type="text/css" media="all" href="./css/uploadfile.css" />
    </head>
    <body>
