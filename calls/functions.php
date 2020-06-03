@@ -150,20 +150,21 @@ function listeTitres($Connexion, $Indice, $Selectionne = '0'){
 }
 
 // Requête SQL d'ajout d'un classeur. Retourne true si effectuée avec succès
-function ajoutClasseur($C, $iUser, $iNbRep, $strClasseur, $iImage = ''){
+function ajoutClasseur($C, $iUser, $iNbRep, $strClasseur, $iImage){
     // Ajout du classeur
     $paramImage = '';
     $image = '';
     if( $iImage !== ''){
         $paramImage = 'num_tbl_images,';
-        $image = $iImage .',';
+        $image = ',';
     }
     $query = "INSERT INTO tbl_classeurs(numero, num_tbl_users, $paramImage nbRepertoire, titreClasseur)"
-            . "VALUES(null, :user, $image :nbRep, :titreClasseur)";
+            . "VALUES(null, :user, :image$image :nbRep, :titreClasseur)";
     $res = $C->prepare($query);
     // Liaison des variables pour protection de la requête
     $res->bindValue(':user', $iUser, PDO::PARAM_INT);
     $res->bindValue(':nbRep', $iNbRep, PDO::PARAM_INT);
+    $res->bindValue(':image', $iImage, PDO::PARAM_INT);
     $res->bindValue(':titreClasseur', $strClasseur, PDO::PARAM_STR);
     $res->execute();
     $res->closeCursor();
