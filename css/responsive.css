@@ -637,14 +637,14 @@ svg>path {
 #fond {
     height: 100%;
     background-image: url(../images/frog.jpg);
-    background-position: top left;
+    background-position: top center;
     background-size: cover;
 }
 
 #conteneur {
     display: block;
     position: relative;
-    top: 2rem;
+    top: 3vw;
     margin: 0 auto;
     max-width: 600px;
     width: fit-content;
@@ -891,7 +891,7 @@ svg {
         font-size: 1.2rem;
     }
     #conteneur {
-        top: 0;
+        top: 20vw;
         width: 100%;
     }
 }
