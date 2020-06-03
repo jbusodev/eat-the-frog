@@ -76,6 +76,7 @@ $(document).ready(function() {
     // Edit a task
     $(document).on("click", ".edit", function() {
         var nItem = $(this).attr('data-id');
+        image = $(this).attr('data-image');
         setDialog('edit', nItem);
     });
 

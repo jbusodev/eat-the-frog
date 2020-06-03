@@ -546,6 +546,7 @@ function setDialog(action, nItem) {
                                     }
                                 }
                             });
+                            $('#image').val(image);
                             break;
                         case 'delete':
                             $('#dialog').dialog({
