@@ -188,8 +188,7 @@ if( isset($_POST['action']) ){
                     echo '</div>';
 
                     // uncomment once heroku file upload is functional
-                    /*
-                    echo '<div class="champs c_caches noImage ou" style="text-align:center;font-weight:bold">';
+                    /*echo '<div class="champs c_caches noImage ou" style="text-align:center;font-weight:bold">';
                         echo 'OU';
                     echo '</div>';
                     if($action !== 'delete'){
