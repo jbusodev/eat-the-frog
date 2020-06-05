@@ -189,12 +189,15 @@ if( isset($_POST['action']) ){
                     echo '<div class="champs c_caches noImage ou" style="text-align:center;font-weight:bold">';
                         echo 'OU';
                     echo '</div>';
+                    // uncomment once heroku file upload is functional
+                    /*
                     if($action !== 'delete'){
                         echo '<div id="boxUpload">';
                             echo '<div class="champs c_caches" id="picUpload">Télécharger</div>';
                             echo '<div id="status" class="little-font-size"></div>';
                         echo '</div>';
                     }
+                    */
                     echo '<input id="item" type="hidden" value="'. $nItem .'" />';
                     echo '<input id="pseudo" type="hidden" value="'. $pseudo .'" />';
                     echo '<input id="image" type="hidden" value="'. imageSelected($connexion, $nImage) .'" />';
