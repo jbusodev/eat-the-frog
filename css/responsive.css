@@ -877,6 +877,9 @@ svg {
         width: 100%;
         text-align: center;
     }
+    #footer {
+        padding: 0.3em;
+    }
     #footer ul li {
         display: inline-block;
     }
