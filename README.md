@@ -30,7 +30,7 @@ portfolioadm:demo_!#% | administrator
 
 ## Tech Stack
 - PHP
-- PostgreSQL
+- MySQL
 - Javascript
 - jQuery & jQuery UI
 - Ajax
