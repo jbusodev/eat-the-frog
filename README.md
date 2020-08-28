@@ -14,9 +14,9 @@ This is a task management app with the following pages:
 When cloning on your local machine, make sure you have a functional Apache, MySQL and PHP installation.
 
 Before browsing the app on your localhost, create a ```crapaud``` database and import its content with ```crapaud.sql```  
-Then, edit ```connexionPDO.php``` to match your phpMyAdmin settings.
+Then, edit ```connexionPDO-local.php``` to match your phpMyAdmin settings and rename it as ```connexionPDO.php```.
 
-You should be good to use the App! You will find below the login credentials to access the app.
+You should be ready to use the App! You will find below the login credentials to access the app.
 ### Credentials
 **username**:**password** | **level**  
 portfolio:demo_!#%    | user  
