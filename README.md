@@ -26,9 +26,12 @@ portfolioadm:demo_!#% | administrator
 - Internationalization & Localization
 - Sorting feature
 - Signup Page
-- Migrate to Laravel + Vue.js
+- Migrate to Laravel + Vue.js OR ReactJS + Django.
+- Update code to better take advantage of OOP & Classes
 
 ## Tech Stack
+- HTML
+- CSS
 - PHP
 - MySQL
 - Javascript
