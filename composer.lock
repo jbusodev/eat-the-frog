@@ -22,7 +22,7 @@
             },
             "require": {
                 "cash/lrucache": "^1.0",
-                "guzzlehttp/guzzle": "^6.3",
+                "guzzlehttp/guzzle": "6.5.7",
                 "php": ">=5.4"
             },
             "require-dev": {
